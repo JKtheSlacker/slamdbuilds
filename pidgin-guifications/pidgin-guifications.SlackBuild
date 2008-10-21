@@ -3,6 +3,8 @@
 # Slackware build script for pidgin-guifications
 # Written by Andrew Brouwers
 
+# Updated to slamd64.
+
 PRGNAM=pidgin-guifications
 VERSION=2.16
 ARCH=${ARCH:-x86_64}

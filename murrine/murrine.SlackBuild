@@ -3,8 +3,7 @@
 # Slackware build script for murrine
 # Written by Grigorios Bouzakis (grbzks@gmail.com)
 
-# Modified by the SlackBuilds.org project to include theme support
-set -e
+# Updated to slamd64.
 
 PRGNAM=murrine
 VERSION=0.53.1

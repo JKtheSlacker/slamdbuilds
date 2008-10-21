@@ -20,8 +20,7 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# Modified by Heinz Wiesinger <hmwiesinger@gmx.at>
-#  -- no additional license terms added
+# Updated to slamd64.
 
 NAME=xf86-input-synaptics
 VERSION=0.15.2
@@ -76,6 +75,7 @@ cp -a ChangeLog COPYING INSTALL NEWS README TODO \
   $PKG/usr/doc/$NAME-$VERSION
 cat $CWD/$NAME.SlackBuild > $PKG/usr/doc/$NAME-$VERSION/$NAME.SlackBuild
 cat $CWD/README.SLACKWARE > $PKG/usr/doc/$NAME-$VERSION/README.SLACKWARE
+
 # Put the example fdi file in here and change the manpage to reference
 # the correct directory
 cp fdi/11-x11-synaptics.fdi $PKG/usr/doc/$NAME-$VERSION/fdi

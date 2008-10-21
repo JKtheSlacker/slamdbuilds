@@ -3,6 +3,8 @@
 # Slackware build script for transmission
 # Written by Iskar Enev <iskar.enev[@]gmail.com>
 
+# Updated to slamd64.
+
 PRGNAM=transmission
 VERSION=1.34
 ARCH=${ARCH:-x86_64}

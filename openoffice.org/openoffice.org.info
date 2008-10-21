@@ -1,0 +1,8 @@
+PRGNAM="openoffice.org"
+VERSION="3.0.0rc1"
+HOMEPAGE="http://openoffice.org"
+DOWNLOAD="http://ftp.osuosl.org/pub/openoffice/contrib/rc/3.0.0rc1/OOo_3.0.0rc1_20080904_LinuxX86-64_install_en-US.tar.gz"
+MD5SUM="77720f251e1952ca54cd2840420c5f03"
+MAINTAINER="Robby Workman"
+EMAIL="rw@rlworkman.net"
+APPROVED=""

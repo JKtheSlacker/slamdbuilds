@@ -1,0 +1,8 @@
+PRGNAM="xf86-input-synaptics"
+VERSION="0.15.2"
+HOMEPAGE="http://xorg.freedesktop.org/"
+DOWNLOAD="http://xorg.freedesktop.org/archive/individual/driver/xf86-input-synaptics-0.15.2.tar.bz2"
+MD5SUM="0a588c729295b9a91a05d9d157270917"
+MAINTAINER="Robby Workman"
+EMAIL="rw@rlworkman.net"
+APPROVED=""

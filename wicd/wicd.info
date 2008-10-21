@@ -1,0 +1,8 @@
+PRGNAM="wicd"
+VERSION="1.5.2"
+HOMEPAGE="http://wicd.net/"
+DOWNLOAD="http://downloads.sourceforge.net/wicd/wicd-1.5.2.tar.gz"
+MD5SUM="c233b918c1bbaed98f3ffee30727471f"
+MAINTAINER="Robby Workman"
+EMAIL="rw@rlworkman.net"
+APPROVED="Michiel"

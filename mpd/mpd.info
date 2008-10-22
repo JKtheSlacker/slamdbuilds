@@ -1,0 +1,4 @@
+PRGNAM="mpd"
+VERSION="0.13.2"
+HOMEPAGE="http://www.musicpd.org/"
+DOWNLOAD="http://musicpd.org/uploads/files/mpd-0.13.2.tar.gz"

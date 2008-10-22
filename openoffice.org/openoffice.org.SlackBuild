@@ -25,7 +25,7 @@
 # Updated to slamd64 + OOo3 by Andrew Brouwers
 
 PRGNAM=openoffice.org
-VERSION=3.0.0rc1
+VERSION=3.0.0
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_ajb}
@@ -49,12 +49,12 @@ set -e
 
 # Ignore this - it's just to get the toplevel directory name of the 
 # extracted tarball archive
-SOURCEDIR=$(tar -tzf $CWD/OOo_${VERSION}_20080904_LinuxX86-64_install_${OOLANG}.tar.gz | head -1 | tr -d \/)
+SOURCEDIR=$(tar -tzf $CWD/OOo_${VERSION}_LinuxX86-64_install_${OOLANG}.tar.gz | head -1 | tr -d \/)
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 rm -rf $TMP/$SOURCEDIR
-tar xvf $CWD/OOo_${VERSION}_20080904_LinuxX86-64_install_${OOLANG}.tar.gz -C $TMP
+tar xvf $CWD/OOo_${VERSION}_LinuxX86-64_install_${OOLANG}.tar.gz -C $TMP
 cd $TMP/$SOURCEDIR/RPMS/
 mv desktop-integration/openoffice.org3.0-freedesktop-menus-*.noarch.rpm .
 for FILE in *.rpm ; do rpm2cpio < $FILE | cpio -imdv ; done

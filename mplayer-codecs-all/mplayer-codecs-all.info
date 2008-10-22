@@ -1,0 +1,4 @@
+PRGNAM="mplayer-codecs-all"
+VERSION="20071007"
+HOMEPAGE="http://www.mplayerhq.hu"
+DOWNLOAD="http://www3.mplayerhq.hu/MPlayer/releases/codecs/essential-amd64-20071007.tar.bz2"

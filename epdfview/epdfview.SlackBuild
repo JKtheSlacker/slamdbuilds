@@ -69,12 +69,18 @@ patch -Np0 -i $CWD/epdfview-0.1.6-print-segfault.patch || exit 1
 make || exit 1
 make install-strip DESTDIR=$PKG || exit 1
 
+# Add some default icons
+install -d $PKG/usr/share/icons/hicolor/{24x24,32x32,48x48}/apps
+install -m644 data/icon_epdfview-24.png "$PKG/usr/share/icons/hicolor/24x24/apps/epdfview.png"
+install -m644 data/icon_epdfview-32.png "$PKG/usr/share/icons/hicolor/32x32/apps/epdfview.png"
+install -m644 data/icon_epdfview-48.png "$PKG/usr/share/icons/hicolor/48x48/apps/epdfview.png"
+
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a AUTHORS COPYING INSTALL NEWS README $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 # Fix path to icons in .desktop file
-sed -i 's#Icon=postscript-viewer.png#Icon=/usr/share/icons/gnome/32x32/apps/postscript-viewer.png#' $PKG/usr/share/applications/$PRGNAM.desktop
+sed -i 's#Icon=postscript-viewer.png#Icon=epdfview#' $PKG/usr/share/applications/$PRGNAM.desktop
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

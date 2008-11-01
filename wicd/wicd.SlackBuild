@@ -54,8 +54,8 @@ dhcp_client = 2
 EOF
 
 # Add robby's pm-utils hook
-mkdir -p $PKG/usr/lib/pm-utils/sleep.d
-cp -a other/55-wicd $PKG/usr/lib/pm-utils/sleep.d
+mkdir -p $PKG/usr/lib64/pm-utils/sleep.d
+cp -a other/55-wicd $PKG/usr/lib64/pm-utils/sleep.d
 
 # Don't clobber init script on upgrade
 mv $PKG/etc/rc.d/rc.wicd $PKG/etc/rc.d/rc.wicd.new

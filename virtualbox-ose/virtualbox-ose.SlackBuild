@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Slamd64 build script for virtualbox-ose
+# Slackware build script for virtualbox-ose
 
 # Copyright 2008 Heinz Wiesinger <pprkut@liwjatan.at>
 # Copyright 2008 Mauro Giachero <mauro.giachero@gmail.com>
@@ -38,20 +38,32 @@ TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
+PKGARCH=${ARCH}_${DISTRO}
+
 # kmk doesn't support MAKEFLAGS, so we use JOBS here
 JOBS=${JOBS:-3}
 
+# Define Variable Names
+GUI=""
+qtgui=""
+
 # Support for the pulseaudio-backend
-PULSE=${PULSE:-no}
-
-# Support for the qt3-frontend
-QT3=${QT3:-yes}
-
-# Support for the qt4-frontend
-QT4=${QT4:-no}
+if [ "${PULSE:-no}" = "yes" ]; then
+    do_pulse=""
+else
+    do_pulse="--disable-pulse"
+fi
 
 # Using the vboxusers-group
 VBOXUSERS=${VBOXUSERS:-yes}
+
+# Enable Hardening - Defaulting to yes as requested by upstream
+if [ "${HARDENING:-no}" = "yes" ]; then
+  harden="--enable-hardening"
+  VBOXUSERS="yes"
+else
+  harden="--disable-hardening"
+fi
 
 if [ "$ARCH" = "i486" ]; then
   SLKCFLAGS="-O2 -march=i486 -mtune=i686"
@@ -61,8 +73,6 @@ elif [ "$ARCH" = "x86_64" ]; then
   SLKCFLAGS="-O2 -fPIC"
 fi
 
-PKGARCH=${ARCH}_${DISTRO}
-
 set -e
 
 rm -rf $PKG
@@ -71,39 +81,49 @@ cd $TMP
 rm -rf $SRCNAM-$VERSION
 tar xvf $CWD/$SRCNAM-${VERSION}-OSE.tar.bz2
 cd $SRCNAM-$VERSION
+patch -d src/VBox/Installer/linux -i $CWD/VBox.diff
 chown -R root:root .
 chmod -R u+w,go+r-w,a-s .
 
-if [ "$PULSE" = "yes" ]; then
-    do_pulse=""
-else
-    do_pulse="--disable-pulse"
-fi
-
-if [ "$QT3" = "yes" ]; then
-    qt3gui="--with-qt-dir=/usr/lib/qt"
-
-    if [ "$QT4" = "yes" ]; then
-        patch -d src/VBox/Installer/linux -i $CWD/VBox.diff
-        qt4gui="--with-qt4-dir=/usr/lib64/qt4"
-        GUI="VirtualBox VirtualBox3"
-    else
-        cd src/VBox/Installer/linux
-            sed -i "s|/VirtualBox|/VirtualBox3|" VBox.sh
-        cd -
-        qt4gui="--disable-qt4"
-        GUI="VirtualBox"
-    fi
-
-else
-    qt3gui="--disable-qt3"
-fi
-
-# The Innotek init script tries to set the device nodes permissions.
-# This is problematic with VBOXUSERS=no. But you probably still want
+# The Innotek init script tries to set the device nodes' permissions.
+# This is problematic with VBOXUSERS=no, but you probably still want
 # this for security reasons when using the vboxusers-group
-if ! [ "$VBOXUSERS" = "yes" ]; then
+if [ "$VBOXUSERS" = "yes" ]; then
+  GROUP="vboxusers"
+  MODE="750"
+  mkdir -p $PKG/etc/udev/rules.d
+  echo 'KERNEL=="vboxdrv", NAME="vboxdrv", OWNER="root", GROUP="vboxusers", MODE="0660"' \
+    > $PKG/etc/udev/rules.d/60-vboxdrv.rules
+else
   patch -d src/VBox/Installer/linux -i $CWD/vboxdrv.sh.in.diff
+  GROUP="root"
+  MODE="755"
+  mkdir -p $PKG/etc/udev/rules.d
+  echo 'KERNEL=="vboxdrv", NAME="vboxdrv", MODE="0666"' \
+    > $PKG/etc/udev/rules.d/60-vboxdrv.rules
+fi
+
+# Support for the qt3-frontend
+if [ "${QT3:-yes}" = "yes" ]; then
+  qtgui+=" --with-qt-dir=/usr/lib64/qt"
+  GUI+=" VirtualBox3"
+  mkdir -p $PKG/usr/share/applications
+  cp -f $CWD/VirtualBox3.desktop $PKG/usr/share/applications/
+  sed -i "s|\$VBOX_DOC_PATH|/usr/share/virtualbox|" \
+    $PKG/usr/share/applications/VirtualBox3.desktop
+else
+  qtgui+=" --disable-qt3"
+fi
+
+# Support for the qt4-frontend
+if [ "${QT4:-no}" = "yes" ]; then
+  GUI+=" VirtualBox"
+  mkdir -p $PKG/usr/share/applications
+  cp -f src/VBox/Installer/linux/VirtualBox.desktop $PKG/usr/share/applications/
+  sed -i "s|\$VBOX_DOC_PATH|/usr/share/virtualbox|" \
+    $PKG/usr/share/applications/VirtualBox.desktop
+else
+  qtgui+=" --disable-qt4"
 fi
 
 cd src/VBox/Frontends/VirtualBox
@@ -115,10 +135,9 @@ CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 LDFLAGS="-L/lib64 -L/usr/lib64" \
 ./configure \
-  --disable-hardening \
   --ose \
-  $qt3gui \
-  $qt4gui \
+  $harden \
+  $qtgui \
   $do_pulse
 
 . env.sh
@@ -127,45 +146,52 @@ kmk -j ${JOBS} LOCALCFG=$CWD/LocalConfig.kmk
 
 mkdir -p $PKG/usr/{lib64,share}/virtualbox \
   $PKG/usr/{bin,src} \
-  $PKG/usr/share/{pixmaps,applications} \
+  $PKG/usr/share/pixmaps \
   $PKG/etc/{rc.d,vbox}
 
-cp -f src/VBox/Installer/linux/VirtualBox.desktop $PKG/usr/share/applications/
 cp -f src/VBox/Installer/linux/vboxnet.sh.in $PKG/etc/rc.d/rc.vboxnet.new
 cp -f src/VBox/Installer/linux/vboxdrv.sh.in $PKG/etc/rc.d/rc.vboxdrv.new
 cp -f $CWD/vbox.cfg $PKG/etc/vbox/vbox.cfg.new
-cp -f src/VBox/Installer/linux/VBoxAddIF.sh $PKG/usr/bin/VBoxTap
+install -m $MODE -g $GROUP src/VBox/Installer/linux/VBoxAddIF.sh $PKG/usr/lib64/virtualbox/VBoxTap
 
 cd out/linux.amd64/release/bin/
   rm -f vboxdrv.ko
   mv VBox.png $PKG/usr/share/pixmaps/
   mv src $PKG/usr/src/vboxdrv-$VERSION
-  mv sdk VBoxSysInfo.sh nls* *.tar.gz $PKG/usr/share/virtualbox/
-  mv VBox.sh $PKG/usr/bin/VBox
-  mv VBoxTunctl vditool $PKG/usr/bin/
+  mv sdk nls* *.tar.gz $PKG/usr/share/virtualbox/
+  install -m $MODE -g $GROUP VBoxSysInfo.sh $PKG/usr/share/virtualbox/
+  install -m $MODE -g $GROUP VBoxTunctl $PKG/usr/bin/
+  rm -f VoxSysInfo.sh VBoxTunctl
   mv * $PKG/usr/lib64/virtualbox/
+  chown -R root:$GROUP $PKG/usr/lib64/virtualbox/
+  chmod -R $MODE $PKG/usr/lib64/virtualbox/
+  mv $PKG/usr/lib64/virtualbox/VBox.sh $PKG/usr/lib64/virtualbox/VBox
 cd -
 
-mkdir -p $PKG/etc/udev/rules.d
-if [ "$VBOXUSERS" = "yes" ]; then
-  echo 'KERNEL=="vboxdrv", NAME="vboxdrv", OWNER="root", GROUP="vboxusers", MODE="0660"' \
-    > $PKG/etc/udev/rules.d/60-vboxdrv.rules
-else
-  echo 'KERNEL=="vboxdrv", NAME="vboxdrv", MODE="0666"' \
-    > $PKG/etc/udev/rules.d/60-vboxdrv.rules
-fi
-
 for i in $GUI VBoxManage VBoxSDL VBoxHeadless VBoxVRDP; do
-  ln -s /usr/bin/VBox $PKG/usr/bin/$i ;
+  ln -s /usr/lib64/virtualbox/VBox $PKG/usr/bin/$i ;
 done
 
 for i in VBoxAddIF VBoxDeleteIF; do
-  ln -s /usr/bin/VBoxTap $PKG/usr/bin/$i
+  ln -s /usr/lib64/virtualbox/VBoxTap $PKG/usr/bin/$i
 done
+
+ln -s /usr/lib64/virtualbox/vditool $PKG/usr/bin/vditool
+
+if [ "$harden" = "--enable-hardening" ]; then
+  for i in $GUI VBoxSDL VBoxHeadless; do
+    chmod 4${MODE} $PKG/usr/lib64/virtualbox/$i
+  done
+fi
 
 if [ -e "$CWD/VBoxGuestAdditions_$VERSION.iso" ]; then
   cp -f $CWD/VBoxGuestAdditions_$VERSION.iso \
     $PKG/usr/share/virtualbox/VBoxGuestAdditions.iso
+fi
+
+if [ -e "$CWD/UserManual.pdf" ]; then
+  cp -f $CWD/UserManual.pdf \
+    $PKG/usr/share/virtualbox/UserManual.pdf
 fi
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION

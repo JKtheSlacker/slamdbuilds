@@ -1,0 +1,180 @@
+#!/bin/sh
+
+# Slamd64 build script for virtualbox-ose
+
+# Copyright 2008 Heinz Wiesinger <pprkut@liwjatan.at>
+# Copyright 2008 Mauro Giachero <mauro.giachero@gmail.com>
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+# Modified for Slamd64 by JK Wood <joshuakwood@gmail.com>
+
+PRGNAM=virtualbox-ose
+SRCNAM=VirtualBox
+VERSION=2.0.2
+ARCH=${ARCH:-x86_64}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+DISTRO=${DISTRO:-slamd64}
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+# kmk doesn't support MAKEFLAGS, so we use JOBS here
+JOBS=${JOBS:-3}
+
+# Support for the pulseaudio-backend
+PULSE=${PULSE:-no}
+
+# Support for the qt3-frontend
+QT3=${QT3:-yes}
+
+# Support for the qt4-frontend
+QT4=${QT4:-no}
+
+# Using the vboxusers-group
+VBOXUSERS=${VBOXUSERS:-yes}
+
+if [ "$ARCH" = "i486" ]; then
+  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+elif [ "$ARCH" = "i686" ]; then
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+fi
+
+PKGARCH=${ARCH}_${DISTRO}
+
+set -e
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $SRCNAM-$VERSION
+tar xvf $CWD/$SRCNAM-${VERSION}-OSE.tar.bz2
+cd $SRCNAM-$VERSION
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+
+if [ "$PULSE" = "yes" ]; then
+    do_pulse=""
+else
+    do_pulse="--disable-pulse"
+fi
+
+if [ "$QT3" = "yes" ]; then
+    qt3gui="--with-qt-dir=/usr/lib/qt"
+
+    if [ "$QT4" = "yes" ]; then
+        patch -d src/VBox/Installer/linux -i $CWD/VBox.diff
+        qt4gui="--with-qt4-dir=/usr/lib64/qt4"
+        GUI="VirtualBox VirtualBox3"
+    else
+        cd src/VBox/Installer/linux
+            sed -i "s|/VirtualBox|/VirtualBox3|" VBox.sh
+        cd -
+        qt4gui="--disable-qt4"
+        GUI="VirtualBox"
+    fi
+
+else
+    qt3gui="--disable-qt3"
+fi
+
+# The Innotek init script tries to set the device nodes permissions.
+# This is problematic with VBOXUSERS=no. But you probably still want
+# this for security reasons when using the vboxusers-group
+if ! [ "$VBOXUSERS" = "yes" ]; then
+  patch -d src/VBox/Installer/linux -i $CWD/vboxdrv.sh.in.diff
+fi
+
+cd src/VBox/Frontends/VirtualBox
+  sed -i "s/VirtualBox3_QT_TRANSLATIONS/VirtualBox_QT_TRANSLATIONS/" \
+    Makefile.kmk
+cd -
+
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
+LDFLAGS="-L/lib64 -L/usr/lib64" \
+./configure \
+  --disable-hardening \
+  --ose \
+  $qt3gui \
+  $qt4gui \
+  $do_pulse
+
+. env.sh
+
+kmk -j ${JOBS} LOCALCFG=$CWD/LocalConfig.kmk
+
+mkdir -p $PKG/usr/{lib64,share}/virtualbox \
+  $PKG/usr/{bin,src} \
+  $PKG/usr/share/{pixmaps,applications} \
+  $PKG/etc/{rc.d,vbox}
+
+cp -f src/VBox/Installer/linux/VirtualBox.desktop $PKG/usr/share/applications/
+cp -f src/VBox/Installer/linux/vboxnet.sh.in $PKG/etc/rc.d/rc.vboxnet.new
+cp -f src/VBox/Installer/linux/vboxdrv.sh.in $PKG/etc/rc.d/rc.vboxdrv.new
+cp -f $CWD/vbox.cfg $PKG/etc/vbox/vbox.cfg.new
+cp -f src/VBox/Installer/linux/VBoxAddIF.sh $PKG/usr/bin/VBoxTap
+
+cd out/linux.amd64/release/bin/
+  rm -f vboxdrv.ko
+  mv VBox.png $PKG/usr/share/pixmaps/
+  mv src $PKG/usr/src/vboxdrv-$VERSION
+  mv sdk VBoxSysInfo.sh nls* *.tar.gz $PKG/usr/share/virtualbox/
+  mv VBox.sh $PKG/usr/bin/VBox
+  mv VBoxTunctl vditool $PKG/usr/bin/
+  mv * $PKG/usr/lib64/virtualbox/
+cd -
+
+mkdir -p $PKG/etc/udev/rules.d
+if [ "$VBOXUSERS" = "yes" ]; then
+  echo 'KERNEL=="vboxdrv", NAME="vboxdrv", OWNER="root", GROUP="vboxusers", MODE="0660"' \
+    > $PKG/etc/udev/rules.d/60-vboxdrv.rules
+else
+  echo 'KERNEL=="vboxdrv", NAME="vboxdrv", MODE="0666"' \
+    > $PKG/etc/udev/rules.d/60-vboxdrv.rules
+fi
+
+for i in $GUI VBoxManage VBoxSDL VBoxHeadless VBoxVRDP; do
+  ln -s /usr/bin/VBox $PKG/usr/bin/$i ;
+done
+
+for i in VBoxAddIF VBoxDeleteIF; do
+  ln -s /usr/bin/VBoxTap $PKG/usr/bin/$i
+done
+
+if [ -e "$CWD/VBoxGuestAdditions_$VERSION.iso" ]; then
+  cp -f $CWD/VBoxGuestAdditions_$VERSION.iso \
+    $PKG/usr/share/virtualbox/VBoxGuestAdditions.iso
+fi
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -f COPYING COPYING.CDDL $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$PKGARCH-$BUILD$TAG.tgz

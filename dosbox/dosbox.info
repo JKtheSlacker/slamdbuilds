@@ -1,0 +1,8 @@
+PRGNAM="dosbox"
+VERSION="0.72"
+HOMEPAGE="http://dosbox.sourceforge.net"
+DOWNLOAD="http://dl.sourceforge.net/dosbox/dosbox-0.72.tar.gz"
+MD5SUM="262939cc28966c1f9b07c2bc472b699f"
+MAINTAINER="JK Wood"
+EMAIL="joshuakwood@gmail.com"
+APPROVED=""

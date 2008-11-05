@@ -11,4 +11,12 @@ config() {
   # Otherwise, we leave the .new copy for the admin to consider...
 }
 
+# Keep same perms on rc.mpd.new:
+if [ -e etc/rc.d/rc.mpd ]; then
+  cp -a etc/rc.d/rc.mpd etc/rc.d/rc.mpd.new.incoming
+  cat etc/rc.d/rc.mpd.new > etc/rc.d/rc.mpd.new.incoming
+  mv etc/rc.d/rc.mpd.new.incoming etc/rc.d/rc.mpd.new
+fi
+
+config etc/rc.d/rc.mpd.new
 config etc/mpd.conf.new

@@ -5,9 +5,14 @@ provides control for music playback over a local network. It also makes
 a great desktop music player, especially if you are a console junkie, 
 like frontend options, or restart X often.
 
-NOTE:  You will have to create a directory manually, ~/.mpd/playlists.  
-Also, be sure to edit the config file (/etc/mpd.conf), if needed, before 
-running the daemon.  
+NOTE:  Edit the config before running.  If using the init script in /etc/rc.d,
+you should consider changing some variables.  Common practice seems to use:
 
-If save status isn't working properly when killing, try "killall -TERM mpd", 
-and that should resolve the problem.
+/var/{lib,log,run}/mpd
+
+for the playlists, logging, and PID (respectively), but the choice is ours.  
+Change the user appropriately, and then issue something along the lines of:
+
+chown -R <your_user>:users /var/{lib,log,run}/mpd
+
+to allow the daemon to run as user.

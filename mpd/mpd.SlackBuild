@@ -67,7 +67,9 @@ LDFLAGS="-L/lib64 -L/usr/lib64" \
 linux64 make || exit 1
 make install-strip DESTDIR=$PKG || exit 1
 
-# Use sample config, without overwriting
+# Use sample config + rc.mpd, without overwriting
+mkdir -p $PKG/etc/rc.d
+install -m 0755 $CWD/mpd.init $PKG/etc/rc.d/rc.mpd.new
 install -D -m 644 doc/mpdconf.example $PKG/etc/mpd.conf.new
 
 gzip -9 $PKG/usr/man/man?/*

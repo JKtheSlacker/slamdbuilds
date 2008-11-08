@@ -28,7 +28,7 @@
 
 NAME=vbox-kernel-module
 PKG_NAME=virtualbox-kernel
-VERSION=2.0.2
+VERSION=2.0.4
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}

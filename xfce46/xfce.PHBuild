@@ -1,0 +1,139 @@
+#!/bin/sh
+
+# Copyright 2003  Slackware Linux, Inc., Concord, CA, USA
+# Copyright 2007, 2008  Patrick J. Volkerding, Sebeka, MN, USA
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+PKGNAM=xfce
+VERSION=4.5.92
+BUILD=${BUILD:-1}
+
+# A few tarballs have different versions; handle them here
+EXO_VERS=0.3.92		# exo version
+THUNAR_VERS=0.9.92	# thunar version
+GXE_VERS=2.5.92		# gtk-xfce-engine version
+TERM_VERS=0.2.8.3	# terminal version
+MPAD_VERS=0.2.14	# mousepad version
+
+. /etc/pkghelpers
+pkghelpers_env
+
+rm -rf $PKG
+mkdir -p $TMP $PKG
+cd $TMP || exit 1
+
+for file in \
+ xfce4-dev-tools-$VERSION.tar.bz2 \
+ libxfce4util-$VERSION.tar.bz2 \
+ libxfcegui4-$VERSION.tar.bz2 \
+ libxfce4menu-$VERSION.tar.bz2 \
+ xfconf-$VERSION.tar.bz2 \
+ exo-$EXO_VERS.tar.bz2 \
+ xfce4-panel-$VERSION.tar.bz2 \
+ Thunar-$THUNAR_VERS.tar.bz2 \
+ xfce4-session-$VERSION.tar.bz2 \
+ xfwm4-$VERSION.tar.bz2 \
+ xfdesktop-$VERSION.tar.bz2 \
+ xfce4-settings-$VERSION.tar.bz2 \
+ xfce-utils-$VERSION.tar.bz2 \
+ xfprint-$VERSION.tar.bz2 \
+ gtk-xfce-engine-GXE_VERS.tar.bz2 \
+ Terminal-TERM_VERS.tar.bz2 \
+ xfce4-appfinder-$VERSION.tar.bz2 \
+ xfce4-mixer-$VERSION.tar.bz2 \
+ xfwm4-themes-$VERSION.tar.bz2 \
+ orage-$VERSION.tar.bz2 \
+ mousepad-$MPAD_VERS.tar.bz2 ;
+do
+  tar xvf $CWD/src/$file || exit 1
+  cd $(basename $file .tar.bz2) || exit 1
+  
+  # Fix permissions
+  pkghelpers_permissions
+  
+    # Here's where we patch or set up any other package-specific stuff:
+      if [ "$file" = "exo-$EXO_VERS.tar.bz2" ]; then
+        PACKAGE_SPECIFIC_OPTIONS="--enable-python"
+      fi
+  
+      if [ "$file" = "xfce4-mixer-$VERSION.tar.bz2" ]; then
+        PACKAGE_SPECIFIC_OPTIONS="--with-sound=alsa"
+      fi
+
+      if [ "$file" = "xfwm4-$VERSION.tar.bz2" ]; then
+        PACKAGE_SPECIFIC_OPTIONS="--enable-compositor --enable-xinerama"
+      fi
+
+    CFLAGS="$SLKCFLAGS" \
+    CXXFLAGS="$SLKCFLAGS" \
+    ./configure \
+      --prefix=/usr \
+      --libdir=/usr/lib$LIBSUFFIX \
+      --sysconfdir=/etc/xfce \
+      --mandir=/usr/man \
+      --docdir=/usr/doc/xfce-$VERSION/$(basename $file .tar.bz2) \
+      --disable-static \
+      $PACKAGE_SPECIFIC_OPTIONS
+  
+    # Unset this now -- we're done with it
+    unset PACKAGE_SPECIFIC_OPTIONS
+  
+    make || exit 1
+    make install || exit 1
+    make install DESTDIR=$PKG || exit 1
+  
+    mkdir -p $PKG/usr/doc/xfce-$VERSION/$(basename $file .tar.bz2)
+    # This will cause errors, but won't miss any docs:
+    cp -a \
+      AUTHORS BUGS COMPOSITOR COPYING* FAQ HACKING INSTALL \
+      NEWS NOTES README* THANKS TODO example.gtkrc-2.0 \
+     $PKG/usr/doc/xfce-$VERSION/$(basename $file .tar.bz2) \
+     2> /dev/null || true
+
+  cd - ;
+done
+
+# Do a few fixups - Terminal and Thunar ignore --docdir
+( cd $PKG/usr/share/doc
+    mv Thunar/* $PKG/usr/doc/xfce-$VERSION/Thunar-$THUNAR_VERS
+    mv Terminal/* $PKG/usr/doc/xfce-$VERSION/Terminal-$TERM_VERS
+  cd $PKG/usr/doc
+    ln -sf xfce-$VERSION/Thunar-$THUNAR_VERS Thunar
+    ln -sf xfce-$VERSION/Terminal-$TERM_VERS Terminal
+  rm -rf $PKG/usr/share/doc
+) || exit 1
+
+mkdir -p $PKG/etc/profile.d
+cp -a $CWD/profile.d/* $PKG/etc/profile.d
+chown root:root $PKG/etc/profile.d/*
+chmod 0755 $PKG/etc/profile.d/*
+
+mkdir -p $PKG/etc/X11/xinit
+( cd $PKG/etc/X11/xinit
+  ln -sf ../../xfce/xdg/xfce4/xinitrc xinitrc.xfce
+  chmod 0755 ../../xfce/xdg/xfce4/xinitrc
+)
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+cd $PKG
+pkghelpers_fixup
+pkghelpers_makepkg

@@ -42,9 +42,9 @@ cd $TMP || exit 1
 for file in \
  xfce4-dev-tools-$VERSION.tar.bz2 \
  libxfce4util-$VERSION.tar.bz2 \
+ xfconf-$VERSION.tar.bz2 \
  libxfcegui4-$VERSION.tar.bz2 \
  libxfce4menu-$VERSION.tar.bz2 \
- xfconf-$VERSION.tar.bz2 \
  exo-$EXO_VERS.tar.bz2 \
  xfce4-panel-$VERSION.tar.bz2 \
  Thunar-$THUNAR_VERS.tar.bz2 \

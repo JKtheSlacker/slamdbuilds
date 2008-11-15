@@ -75,6 +75,14 @@ do
         PACKAGE_SPECIFIC_OPTIONS="--enable-python"
       fi
   
+      if [ "$file" = "xfce4-mixer-$VERSION.tar.bz2" ]; then
+        PACKAGE_SPECIFIC_OPTIONS="--with-sound=alsa"
+        # A stale .desktop file for the panel plugin was shipped in the tarball, and
+        # it prevents the correct one from being generated, so we'll remove it first
+        # http://bugzilla.xfce.org/show_bug.cgi?id=4538
+        rm -f panel-plugin/xfce4-mixer.desktop
+      fi
+
       if [ "$file" = "xfwm4-$VERSION.tar.bz2" ]; then
         PACKAGE_SPECIFIC_OPTIONS="--enable-compositor --enable-xinerama"
       fi
@@ -127,9 +135,6 @@ done
     ln -sf xfce-$VERSION/Terminal-$TERM_VERS Terminal
   rm -rf $PKG/usr/share/doc
 ) || exit 1
-
-# xfce mixer - fix desktop entry on recent autoconf.
-sed 's|local/libexec|lib64|' -i $PKG/usr/share/xfce4/panel-plugins/xfce4-mixer.desktop
 
 mkdir -p $PKG/etc/profile.d
 cp -a $CWD/profile.d/* $PKG/etc/profile.d

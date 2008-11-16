@@ -1,0 +1,8 @@
+PRGNAM="flash-player-plugin"
+VERSION="10.0_r12"
+HOMEPAGE="http://www.adobe.com/products/flashplayer"
+DOWNLOAD="http://fpdownload.macromedia.com/get/flashplayer/current/install_flash_player_10_linux.tar.gz"
+MD5SUM="4777665a6149af11233d8a000b89ffb1"
+MAINTAINER="JK Wood"
+EMAIL="joshuakwood@gmail.com"
+APPROVED=""

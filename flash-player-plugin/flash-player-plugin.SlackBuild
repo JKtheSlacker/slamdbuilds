@@ -8,8 +8,8 @@
 
 PRGNAM=flash-player-plugin
 VERSION=10.0_r12.36
-ARCH=i386
-BUILD=${BUILD:-1}
+ARCH=x86_64
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
 # If you use or intend to use Opera at some point, and you want

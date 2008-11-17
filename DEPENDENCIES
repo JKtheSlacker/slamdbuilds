@@ -6,9 +6,6 @@ the base package and mapping dependencies below that.
 If I don't list a package here, that's because it's happy
 by itself.
 
-flash-player-plugin
-  |-http://slaxer.com/packages/flashdeps-102008-x86_64_slamd64-4jkw.tgz
-
 kdebluetooth4
   |-obex-data-server
 

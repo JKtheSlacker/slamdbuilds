@@ -3,11 +3,11 @@
 ## Written by hollywoodb (hollywoodb@fastmail.fm)
 # Modified by the SlackBuilds.org project
 # Script maintained by Robby Workman <rworkman@slackbuilds.org>
-# Modified for Slamd64 by JK Wood <joshuakwood@gmail.com>
+# Heavily Modified for Slamd64 by JK Wood <joshuakwood@gmail.com>
 
 PRGNAM=flash-player-plugin
 VERSION=10
-ARCH=i386
+ARCH=x86_64
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 
@@ -16,7 +16,7 @@ TAG=${TAG:-_SBo}
 # variable:    USE_OPERA=yes ./flash-player-plugin.SlackBuild
 # Note that this should *NOT* be needed if you installed Opera using
 # the SlackBuilds.org build script, as we do a simple patch there to
-# make it look in /usr/lib/mozilla/plugins
+# make it look in /usr/lib64/mozilla/plugins
 USE_OPERA=${USE_OPERA:-no}
 
 CWD=$(pwd)
@@ -29,41 +29,20 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-tar xvf $CWD/install_flash_player_10_linux.tar.gz
+mkdir install_flash_player_10_linux
+tar xvf $CWD/libflashplayer-10.0.d20.7.linux-x86_64.so.tar.gz -C install_flash_player_10_linux
 cd install_flash_player_10_linux
 chown -R root:root .
 chmod -R u+w,go+r-w,a-s .
 
-# Check to make sure we're packaging the same version that this script
-# was written to handle:
-_REALVERS=$(strings libflashplayer.so | grep -e "^Shockwave Flash [.\d+]*" | sed -e "s/Shockwave Flash //g")
-if [ ! "$(echo $_REALVERS | tr ' ' _)" = "$(echo $VERSION)" ]; then
-  echo
-  echo "This build script was written for a different version of the"
-  echo "flash plugin than you have downloaded.  This is probably due"
-  echo "to Adobe changing the upstream tarball - they don't have"
-  echo "versioned tarballs - and it's almost certainly nothing to be"
-  echo "concerned about.  However, if this package doesn't build or"
-  echo "work as expected, contact the SlackBuilds.org project on our"
-  echo "users mailing list."
-  echo
-  sleep 5
-fi
-
 mkdir -p $PKG/usr/lib64/mozilla/plugins
 install -m 0755 libflashplayer.so $PKG/usr/lib64/mozilla/plugins
-
-# Repackage it nicely for 64-bit...
-(
-  cd $PKG/usr/lib64/mozilla/plugins
-  nspluginwrapper -i $(pwd)/libflashplayer.so  
-)
 
 # If the user wants an opera plugin installed, then we'll do that too.
 if [ ! "$USE_OPERA" = "no" ]; then
   mkdir -p $PKG/usr/lib64/opera/plugins
   cd $PKG/usr/lib64/opera/plugins
-    ln -s /usr/lib64/mozilla/plugins/npwrapper.libflashplayer.so .
+    ln -s /usr/lib64/mozilla/plugins/libflashplayer.so .
   cd -
 fi
 

@@ -29,7 +29,7 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-mkdir install_flash_player_10_linux
+mkdir -p install_flash_player_10_linux
 tar xvf $CWD/libflashplayer-10.0.d20.7.linux-x86_64.so.tar.gz -C install_flash_player_10_linux
 cd install_flash_player_10_linux
 chown -R root:root .

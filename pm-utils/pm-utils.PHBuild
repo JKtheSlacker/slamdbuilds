@@ -23,7 +23,7 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PKGNAM=pm-utils
-VERSION=${VERSION:-1.2.21}
+VERSION=${VERSION:-1.2.2.1}
 BUILD=${BUILD:-1}
 
 . /etc/pkghelpers
@@ -33,9 +33,9 @@ rm -rf $PKG
 mkdir -p $PKG
 
 cd $TMP
-rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
-cd $PRGNAM-$VERSION
+rm -rf $PKGNAM-$VERSION
+tar xvf $CWD/$PKGNAM-$VERSION.tar.gz
+cd $PKGNAM-$VERSION
 
 # Make sure ownerships and permissions are sane:
 pkghelpers_permissions
@@ -49,16 +49,16 @@ LDFLAGS="-L/usr/lib64" \
   --prefix=/usr \
   --libdir=/usr/lib64 \
   --sysconfdir=/etc \
-  --docdir=/usr/doc/$PRGNAM-$VERSION \
+  --docdir=/usr/doc/$PKGNAM-$VERSION \
   --mandir=/usr/man
 
 make
 make install DESTDIR=$PKG
 
-mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+mkdir -p $PKG/usr/doc/$PKGNAM-$VERSION
 cp -a AUTHORS COPYING ChangeLog INSTALL NEWS README* TODO \
-  $PKG/usr/doc/$PRGNAM-$VERSION
-cat $CWD/README.SLACKWARE > $PKG/usr/doc/$PRGNAM-$VERSION/README.SLACKWARE
+  $PKG/usr/doc/$PKGNAM-$VERSION
+cat $CWD/README.SLACKWARE > $PKG/usr/doc/$PKGNAM-$VERSION/README.SLACKWARE
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

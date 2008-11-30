@@ -22,39 +22,23 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-PRGNAM=pm-utils
-VERSION=1.2.2.1
-ARCH=${ARCH:-x86_64}
+PKGNAM=pm-utils
+VERSION=${VERSION:-1.2.21}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}
 
-CWD=$(pwd)
-TMP=${TMP:-/tmp/SBo}
-PKG=$TMP/package-$PRGNAM
-OUTPUT=${OUTPUT:-/tmp}
-
-if [ "$ARCH" = "i486" ]; then
-  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
-elif [ "$ARCH" = "s390" ]; then
-  SLKCFLAGS="-O2"
-elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -fPIC"
-fi
-
-set -e
+. /etc/pkghelpers
+pkghelpers_env
 
 rm -rf $PKG
-mkdir -p $TMP $PKG $OUTPUT
+mkdir -p $PKG
+
 cd $TMP
 rm -rf $PRGNAM-$VERSION
 tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
-chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
- -exec chmod 755 {} \; -o \
- \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
- -exec chmod 644 {} \;
+
+# Make sure ownerships and permissions are sane:
+pkghelpers_permissions
 
 # Fix up some SysV init hardcoding
 zcat $CWD/pm-utils-functions.in.patch.gz | patch -p1 || exit 1
@@ -71,14 +55,6 @@ LDFLAGS="-L/usr/lib64" \
 make
 make install DESTDIR=$PKG
 
-find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
-  | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
-
-( cd $PKG/usr/man || exit 1
-  find . -type f -exec gzip -9 {} \;
-  for i in $(find . -type l) ; do ln -s $(readlink $i).gz $i.gz ; rm $i ; done
-)
-
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a AUTHORS COPYING ChangeLog INSTALL NEWS README* TODO \
   $PKG/usr/doc/$PRGNAM-$VERSION
@@ -88,4 +64,5 @@ mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.tgz
+pkghelpers_fixup
+pkghelpers_makepkg

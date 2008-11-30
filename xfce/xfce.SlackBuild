@@ -1,0 +1,190 @@
+#!/bin/sh
+
+# Copyright 2003  Slackware Linux, Inc., Concord, CA, USA
+# Copyright 2007, 2008  Patrick J. Volkerding, Sebeka, MN, USA
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+VERSION=4.4.3
+ARCH=${ARCH:-i486}
+BUILD=${BUILD:-1}
+
+# A few tarballs have different versions; handle them here
+XDT_VERS=4.4.0.1	# xfce4-dev-tools version
+EXO_VERS=0.3.4		# exo version
+THUNAR_VERS=0.9.3	# thunar version
+GXE_VERS=2.4.3		# gtk-xfce-engine version
+TERM_VERS=0.2.8.3	# terminal version
+MPAD_VERS=0.2.14	# mousepad version
+
+NUMJOBS="-j6"
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/xfce-build-dir}
+PKG=$TMP/package-xfce
+
+if [ "$ARCH" = "i486" ]; then
+  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+elif [ "$ARCH" = "s390" ]; then
+  SLKCFLAGS="-O2"
+elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+fi
+
+rm -rf $PKG
+mkdir -p $TMP $PKG
+cd $TMP || exit 1
+
+for file in \
+ xfce4-dev-tools-$XDT_VERS.tar.bz2 \
+ libxfce4util-$VERSION.tar.bz2 \
+ libxfcegui4-$VERSION.tar.bz2 \
+ libxfce4mcs-$VERSION.tar.bz2 \
+ xfce-mcs-manager-$VERSION.tar.bz2 \
+ exo-$EXO_VERS.tar.bz2 \
+ xfce-mcs-plugins-$VERSION.tar.bz2 \
+ xfce4-panel-$VERSION.tar.bz2 \
+ Thunar-$THUNAR_VERS.tar.bz2 \
+ xfce4-session-$VERSION.tar.bz2 \
+ xfwm4-$VERSION.tar.bz2 \
+ xfdesktop-$VERSION.tar.bz2 \
+ xfce-utils-$VERSION.tar.bz2 \
+ xfprint-$VERSION.tar.bz2 \
+ gtk-xfce-engine-$GXE_VERS.tar.bz2 \
+ mousepad-$MPAD_VERS.tar.bz2 \
+ Terminal-$TERM_VERS.tar.bz2 \
+ xfce4-appfinder-$VERSION.tar.bz2 \
+ xfce4-mixer-$VERSION.tar.bz2 \
+ xfce4-icon-theme-$VERSION.tar.bz2 \
+ xfwm4-themes-$VERSION.tar.bz2 \
+ orage-$VERSION.tar.bz2 ;
+do
+  tar xvf $CWD/src/$file || exit 1
+  cd $(basename $file .tar.bz2) || exit 1
+    chown -R root:root .
+    find . \
+     \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+     -exec chmod 755 {} \; -o \
+     \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+     -exec chmod 644 {} \;
+  
+    # Here's where we patch or set up any other package-specific stuff:
+      if [ "$file" = "exo-$EXO_VERS.tar.bz2" ]; then
+        PACKAGE_SPECIFIC_OPTIONS="--enable-python"
+      fi
+
+      if [ "$file" = "xfce4-mixer-$VERSION.tar.bz2" ]; then
+        PACKAGE_SPECIFIC_OPTIONS="--with-sound=alsa"
+        # A stale .desktop file for the panel plugin was shipped in the tarball, and
+        # it prevents the correct one from being generated, so we'll remove it first
+        # http://bugzilla.xfce.org/show_bug.cgi?id=4538
+        rm -f panel-plugin/xfce4-mixer.desktop
+      fi
+  
+      if [ "$file" = "xfwm4-$VERSION.tar.bz2" ]; then
+        PACKAGE_SPECIFIC_OPTIONS="--enable-compositor --enable-xinerama"
+      fi
+
+      if [ "$file" = "Thunar-$THUNAR_VERS.tar.bz2" ]; then
+        # Apply some Thunar patches that didn't make it into the release,
+        # but *are* in the upstream subversion repository
+        zcat $CWD/patches/thunar-vfs-volume-hal_missing-audio-cds-for-volman.patch.gz \
+          | patch -p0 --verbose || exit 1
+        zcat $CWD/patches/use-eject-where-necessary.patch.gz | patch -p0 --verbose || exit 1
+        zcat $CWD/patches/thunar-vfs-nozombies.patch.gz | patch -p0 --verbose || exit 1
+      fi
+    # End patches/package-specific stuff
+
+    CFLAGS="$SLKCFLAGS" \
+    CXXFLAGS="$SLKCFLAGS" \
+    ./configure \
+      --prefix=/usr \
+      --sysconfdir=/etc/xfce \
+      --mandir=/usr/man \
+      --docdir=/usr/doc/xfce-$VERSION/$(basename $file .tar.bz2) \
+      --disable-static \
+      --build=$ARCH-slackware-linux \
+      $PACKAGE_SPECIFIC_OPTIONS
+  
+    # Unset this now -- we're done with it
+    unset PACKAGE_SPECIFIC_OPTIONS
+  
+    make $NUMJOBS || make || exit 1
+    make install || exit 1
+    make install DESTDIR=$PKG || exit 1
+  
+    mkdir -p $PKG/usr/doc/xfce-$VERSION/$(basename $file .tar.bz2)
+    # This will cause errors, but won't miss any docs:
+    cp -a \
+      AUTHORS BUGS COMPOSITOR COPYING* FAQ HACKING INSTALL \
+      NEWS NOTES README* THANKS TODO example.gtkrc-2.0 \
+     $PKG/usr/doc/xfce-$VERSION/$(basename $file .tar.bz2) \
+     2> /dev/null || true
+
+  cd - ;
+done
+
+( cd $PKG
+  find . | xargs file | grep "executable" | grep ELF | cut -f 1 -d : \
+    | xargs strip --strip-unneeded 2> /dev/null
+  find . | xargs file | grep "shared object" | grep ELF | cut -f 1 -d : \
+    | xargs strip --strip-unneeded 2> /dev/null
+)
+
+# Do a few fixups - Terminal and Thunar ignore --docdir
+( cd $PKG/usr/share/doc
+    mv Thunar/* $PKG/usr/doc/xfce-$VERSION/Thunar-$THUNAR_VERS
+    mv Terminal/* $PKG/usr/doc/xfce-$VERSION/Terminal-$TERM_VERS
+  cd $PKG/usr/doc
+    ln -sf xfce-$VERSION/Thunar-$THUNAR_VERS Thunar
+    ln -sf xfce-$VERSION/Terminal-$TERM_VERS Terminal
+  rm -rf $PKG/usr/share/doc
+) || exit 1
+
+# Compress and if needed symlink the man pages:
+if [ -d $PKG/usr/man ]; then
+  ( cd $PKG/usr/man
+    for manpagedir in $(find . -type d -name "man*") ; do
+      ( cd $manpagedir
+        for eachpage in $( find . -type l -maxdepth 1) ; do
+          ln -s $( readlink $eachpage ).gz $eachpage.gz
+          rm $eachpage
+        done
+        gzip -9 *.?
+      )
+    done
+  )
+fi
+
+mkdir -p $PKG/etc/profile.d
+cp -a $CWD/profile.d/* $PKG/etc/profile.d
+chown root:root $PKG/etc/profile.d/*
+chmod 0755 $PKG/etc/profile.d/*
+
+mkdir -p $PKG/etc/X11/xinit
+( cd $PKG/etc/X11/xinit
+  ln -sf ../../xfce/xdg/xfce4/xinitrc xinitrc.xfce
+  chmod 0755 ../../xfce/xdg/xfce4/xinitrc
+)
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+cd $PKG
+/sbin/makepkg -l y -c n $TMP/xfce-$VERSION-$ARCH-$BUILD.tgz

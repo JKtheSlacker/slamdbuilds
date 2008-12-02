@@ -72,9 +72,9 @@ cat $CWD/README.SLACKWARE > $PKG/usr/doc/$PKGNAM-$VERSION/README.SLACKWARE
 # 3. 90clock: Most systems should keep the hwclock in sync over a suspend /
 #    resume cycle, and since this hook is a severe time waster otherwise,
 #    we'll kill it.
-mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION/extra_hooks
+mkdir -p $PKG/usr/doc/$PKGNAM-$VERSION/extra_hooks
 mv $PKG/usr/lib64/pm-utils/sleep.d/{50ntpd,55battery,90clock} \
-  $PKG/usr/doc/$PRGNAM-$VERSION/extra_hooks
+  $PKG/usr/doc/$PKGNAM-$VERSION/extra_hooks
 # #####  REMOVED HOOKS
 # 4. 65alsa: According to the alsa devs, this hook is useless.  Correct
 #    way to workaround buggy alsa drivers is documented in README.SLACKWARE

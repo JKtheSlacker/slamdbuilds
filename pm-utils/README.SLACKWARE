@@ -77,14 +77,14 @@ needed to add for successful suspend/resume to rworkman@slackware.com
 If you need the system to do certain operations before going to sleep and
 then undo them (or perhaps do something new) when waking back up, pm-utils
 supports something called "hooks."  The hooks installed by packages (not only
-pm-utils itself) should be in /usr/lib/pm-utils/sleep.d/, while any hooks 
+pm-utils itself) should be in /usr/lib64/pm-utils/sleep.d/, while any hooks 
 installed by the local system administrator (e.g. things that are only an
 issue on that one machine) should be in /etc/pm/sleep.d/.
 
 Looking at some of the existing hooks should give you a decent idea of their
 capabilities; as a head start, the functions used in the hooks are declared 
-in /usr/lib/pm-utils/functions, which is inherited elsewhere by 
-/usr/lib/pm-utils/pm-functions
+in /usr/lib64/pm-utils/functions, which is inherited elsewhere by 
+/usr/lib64/pm-utils/pm-functions
 
 One way to contribute to pm-utils indirectly is by writing and sending any
 needed hooks scripts to upstream projects; as an example, the hook that 

@@ -23,7 +23,7 @@
 # Updated to slamd64.
 
 PRGNAM=wicd
-VERSION=${VERSION:-1.5.4}
+VERSION=${VERSION:-1.5.5}
 ARCH=noarch
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
@@ -52,10 +52,6 @@ cat << EOF > $PKG/etc/wicd/manager-settings.conf.new
 [Settings]
 dhcp_client = 2
 EOF
-
-# Add robby's pm-utils hook
-mkdir -p $PKG/usr/lib64/pm-utils/sleep.d
-cp -a other/55-wicd $PKG/usr/lib64/pm-utils/sleep.d
 
 # Don't clobber init script on upgrade
 mv $PKG/etc/rc.d/rc.wicd $PKG/etc/rc.d/rc.wicd.new

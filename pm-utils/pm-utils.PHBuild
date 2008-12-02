@@ -24,7 +24,7 @@
 
 PKGNAM=pm-utils
 VERSION=${VERSION:-1.2.2.1}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 
 . /etc/pkghelpers
 pkghelpers_env
@@ -43,6 +43,10 @@ pkghelpers_permissions
 # Fix up some SysV init hardcoding
 zcat $CWD/pm-utils-functions.in.patch.gz | patch -p1 || exit 1
 
+# Fix a bug where acpi video flags aren't properly reset after a resume,
+# causing subsequent resumes to fail
+zcat $CWD/99video.diff.gz | patch -p1 || exit 1
+
 CFLAGS="$SLKCFLAGS" \
 LDFLAGS="-L/usr/lib64" \
 ./configure \
@@ -59,6 +63,24 @@ mkdir -p $PKG/usr/doc/$PKGNAM-$VERSION
 cp -a AUTHORS COPYING ChangeLog INSTALL NEWS README* TODO \
   $PKG/usr/doc/$PKGNAM-$VERSION
 cat $CWD/README.SLACKWARE > $PKG/usr/doc/$PKGNAM-$VERSION/README.SLACKWARE
+
+# According to this thread, these hooks should not be needed:
+#  http://lists.freedesktop.org/archives/pm-utils/2008-November/001753.html
+# #####  MOVED HOOKS
+# 1. 50ntpd: ntp gracefully handles disappearing net on its own
+# 2. 55battery: hal >0.5.10 handles this on its own
+# 3. 90clock: Most systems should keep the hwclock in sync over a suspend /
+#    resume cycle, and since this hook is a severe time waster otherwise,
+#    we'll kill it.
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION/extra_hooks
+mv $PKG/usr/lib64/pm-utils/sleep.d/{50ntpd,55battery,90clock} \
+  $PKG/usr/doc/$PRGNAM-$VERSION/extra_hooks
+# #####  REMOVED HOOKS
+# 4. 65alsa: According to the alsa devs, this hook is useless.  Correct
+#    way to workaround buggy alsa drivers is documented in README.SLACKWARE
+#    http://lists.freedesktop.org/archives/pm-utils/2008-November/001808.html
+# 5. 94cpufreq: all cpufreq governors are "sane" now, so this isn't needed
+rm -f $PKG/usr/lib64/pm-utils/sleep.d/{65alsa,94cpufreq}
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

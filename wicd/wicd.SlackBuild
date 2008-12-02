@@ -25,7 +25,7 @@
 PRGNAM=wicd
 VERSION=${VERSION:-1.5.5}
 ARCH=noarch
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
 CWD=$(pwd)
@@ -44,7 +44,7 @@ cd $PRGNAM-$VERSION
 chown -R root:root .
 
 # The setup-script was patched to support slamd64
-python setup.py configure --lib=/usr/lib64
+python setup.py configure --lib=/usr/lib64 --pmutils=/usr/lib64/pm-utils/sleep.d/
 python setup.py install --root=$PKG
 
 # This sets dhcpcd as the default dhcp client in the Preferences dialog

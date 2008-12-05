@@ -64,7 +64,7 @@ LDFLAGS="-L/lib64 -L/usr/lib64" \
   --disable-static \
   || exit 1
 
-linux64 make || exit 1
+make || exit 1
 make install-strip DESTDIR=$PKG || exit 1
 
 # Use sample config + rc.mpd, without overwriting

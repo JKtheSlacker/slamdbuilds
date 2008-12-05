@@ -21,3 +21,4 @@ if [ -e etc/rc.d/rc.mpd ]; then
 fi
 
 config etc/rc.d/rc.mpd.new
+config etc/mpd.conf.new

@@ -16,7 +16,8 @@ if [ -e etc/rc.d/rc.mpd ]; then
   cp -a etc/rc.d/rc.mpd etc/rc.d/rc.mpd.new.incoming
   cat etc/rc.d/rc.mpd.new > etc/rc.d/rc.mpd.new.incoming
   mv etc/rc.d/rc.mpd.new.incoming etc/rc.d/rc.mpd.new
+ else 
+  chmod 0755 etc/rc.d/rc.mpd.new
 fi
 
 config etc/rc.d/rc.mpd.new
-config etc/mpd.conf.new

@@ -1,0 +1,83 @@
+#!/bin/sh
+# Copyright 2006, 2007, 2008  Patrick J. Volkerding, Sebeka, MN, USA
+# Copyright 2007  Frederick Emmott
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+#  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+#  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
+#  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+#  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+#  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+#  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+#  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+#  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+PKGNAM=pidgin
+VERSION=${VERSION:-2.5.2}
+BUILD=${BUILD:-1}
+
+. /etc/pkghelpers
+pkghelpers_env
+
+rm -rf $PKG
+mkdir -p $PKG
+
+cd $TMP
+rm -rf ${PKGNAM}-${VERSION}
+tar xjvf $CWD/${PKGNAM}-$VERSION.tar.bz2
+cd ${PKGNAM}-$VERSION
+
+# Make sure ownerships and permissions are sane:
+pkghelpers_permissions
+
+# Configure:
+CFLAGS="$SLKCFLAGS" \
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/lib$LIBSUFFIX \
+  --sysconfdir=/etc \
+  --mandir=/usr/man \
+  --enable-dot=no \
+  --disable-schemas-install \
+  --enable-dbus \
+  --enable-gnutls=yes \
+  --enable-nss=no \
+  --enable-gtkspell \
+  --enable-cyrus-sasl \
+  --disable-perl \
+  --disable-meanwhile \
+  --disable-avahi \
+  --disable-nm \
+  --program-prefix= \
+  --program-suffix= \
+  --build=$ARCH-$DISTRO-linux
+
+# Build and install:
+make || exit 1
+make install DESTDIR=$PKG || exit 1
+
+# Add a documentation directory:
+mkdir -p $PKG/usr/doc/${PKGNAM}-$VERSION
+cp -a \
+  AUTHORS COPYING COPYRIGHT HACKING INSTALL NEWS PLUGIN_HOWTO README* \
+  doc \
+  $PKG/usr/doc/${PKGNAM}-$VERSION
+( cd $PKG/usr/doc/${PKGNAM}-$VERSION/doc
+  rm -f Makefile* *.dox *.1 *.in
+)
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+cd $PKG
+pkghelpers_fixup
+pkghelpers_makepkg

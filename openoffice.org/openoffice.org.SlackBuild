@@ -93,6 +93,17 @@ cd -
 # Fix desktop menu entries:
 patch -p0 < $CWD/desktop-ooo-3.0.0.diff
 
+# Install dictionary extensions for spellchecking
+if [ -x "$PKG/opt/openoffice.org3/program/unopkg" ]; then
+  UNOPKGTMP=$TMP/$$$$$$
+  for DICT_LANG in en es fr ; do
+    $PKG/opt/openoffice.org3/program/unopkg add --shared --shared \
+      $PKG/opt/openoffice.org3/share/extension/install/dict-$DICT_LANG.oxt \
+      "-env:UserInstallation=file:///$UNOPKGTMP" ;
+  done
+  rm -rf $UNOPKGTMP
+fi
+
 # Move docs to their correct locations
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 for i in README README.html LICENSE LICENSE.html THIRDPARTYLICENSEREADME.html ; do

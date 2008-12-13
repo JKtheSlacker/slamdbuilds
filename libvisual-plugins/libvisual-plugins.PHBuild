@@ -44,7 +44,7 @@ zcat $CWD/libvisual-plugins.gstreamer.diff.gz | patch -p1 || exit 1
 CFLAGS="$SLKCFLAGS" \
 ./configure \
   --prefix=/usr \
-  --libdir=/usr/lib$LIBSUFFIX
+  --libdir=/usr/lib$LIBSUFFIX \
   $ARCH-$DISTRO-linux
 
 # Build and install:

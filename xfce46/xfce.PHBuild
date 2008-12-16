@@ -22,15 +22,16 @@
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 PKGNAM=xfce
-VERSION=4.5.92
+VERSION=r28979
 BUILD=${BUILD:-1}
 
 # A few tarballs have different versions; handle them here
-EXO_VERS=0.3.92		# exo version
-THUNAR_VERS=0.9.92	# thunar version
-GXE_VERS=2.5.92		# gtk-xfce-engine version
-TERM_VERS=0.2.8.3	# terminal version
-MPAD_VERS=0.2.14	# mousepad version
+XDT_VERS=r28979		# xfce4-dev-tools version
+EXO_VERS=r28979		# exo version
+THUNAR_VERS=r28979	# thunar version
+GXE_VERS=r28979		# gtk-xfce-engine version
+TERM_VERS=r28979	# terminal version
+MPAD_VERS=r28979	# mousepad version
 
 . /etc/pkghelpers
 pkghelpers_env
@@ -48,20 +49,22 @@ for file in \
  exo-$EXO_VERS.tar.bz2 \
  xfce4-panel-$VERSION.tar.bz2 \
  Thunar-$THUNAR_VERS.tar.bz2 \
- xfce4-session-$VERSION.tar.bz2 \
- xfwm4-$VERSION.tar.bz2 \
- xfdesktop-$VERSION.tar.bz2 \
  xfce4-settings-$VERSION.tar.bz2 \
+ xfce4-session-$VERSION.tar.bz2 \
+ xfdesktop-$VERSION.tar.bz2 \
+ xfwm4-$VERSION.tar.bz2 \
  xfce-utils-$VERSION.tar.bz2 \
+ xfce4-mixer-$VERSION.tar.bz2 \
  xfprint-$VERSION.tar.bz2 \
+ xfce4-appfinder-$VERSION.tar.bz2 \
  gtk-xfce-engine-$GXE_VERS.tar.bz2 \
  Terminal-$TERM_VERS.tar.bz2 \
- xfce4-appfinder-$VERSION.tar.bz2 \
- xfce4-mixer-$VERSION.tar.bz2 \
  xfwm4-themes-$VERSION.tar.bz2 \
- orage-$VERSION.tar.bz2 \
- mousepad-$MPAD_VERS.tar.bz2 ;
+ mousepad-$VERSION.tar.bz2 \
+ xfce4-icon-theme-$VERSION.tar.bz2 \
+ orage-$VERSION.tar.bz2 ;
 do
+
   tar xvf $CWD/src/$file || exit 1
   cd $(basename $file .tar.bz2) || exit 1
   
@@ -69,17 +72,16 @@ do
   pkghelpers_permissions
   
     # Here's where we patch or set up any other package-specific stuff:
+      # Patch to only show xfcalendar in XFce (otherwise it shows up in
+      # KDE's Lost & Found and does not work):
+      if [ "$file" = "orage-$VERSION.tar.bz2" ]; then
+        zcat $CWD/xfcalendar.desktop.in.diff.gz | patch -p1 --verbose || exit 1
+      fi
+
       if [ "$file" = "exo-$EXO_VERS.tar.bz2" ]; then
         PACKAGE_SPECIFIC_OPTIONS="--enable-python"
       fi
-  
-      if [ "$file" = "xfce4-mixer-$VERSION.tar.bz2" ]; then
-        PACKAGE_SPECIFIC_OPTIONS="--with-sound=alsa"
-      fi
-
-      if [ "$file" = "xfwm4-$VERSION.tar.bz2" ]; then
-        PACKAGE_SPECIFIC_OPTIONS="--enable-compositor --enable-xinerama"
-      fi
+    # End patches/package-specific stuff
 
     CFLAGS="$SLKCFLAGS" \
     CXXFLAGS="$SLKCFLAGS" \
@@ -90,6 +92,7 @@ do
       --mandir=/usr/man \
       --docdir=/usr/doc/xfce-$VERSION/$(basename $file .tar.bz2) \
       --disable-static \
+      --build=$ARCH-$DISTRO-linux \
       $PACKAGE_SPECIFIC_OPTIONS
   
     # Unset this now -- we're done with it
@@ -110,6 +113,9 @@ do
   cd - ;
 done
 
+# We don't want any of those damn icon caches
+find $PKG/usr/share/icons -type f -name "index-theme.cache" -exec rm -f {} \;
+
 # Do a few fixups - Terminal and Thunar ignore --docdir
 ( cd $PKG/usr/share/doc
     mv Thunar/* $PKG/usr/doc/xfce-$VERSION/Thunar-$THUNAR_VERS
@@ -118,6 +124,20 @@ done
     ln -sf xfce-$VERSION/Thunar-$THUNAR_VERS Thunar
     ln -sf xfce-$VERSION/Terminal-$TERM_VERS Terminal
   rm -rf $PKG/usr/share/doc
+  # Hopefully these won't be needed later, but at least for now, the html 
+  # docs aren't being built with make, so we'll do it manually
+  for i in C es eu fr ja nl pl ru zh_TW ; do
+    cd $TMP/Thunar-$THUNAR_VERS/docs/manual/C
+      xmlto --skip-validation html Thunar.xml
+      cp -a *.html $PKG/usr/doc/xfce-$VERSION/Thunar-$THUNAR_VERS/html/$i
+    cd -
+  done
+  for i in C fr ja ; do
+    cd $TMP/Terminal-$TERM_VERS/doc/$i
+      xmlto --skip-validation html Terminal.xml
+      cp -a *.html $PKG/usr/doc/xfce-$VERSION/Terminal-$TERM_VERS/$i
+    cd -
+  done
 ) || exit 1
 
 mkdir -p $PKG/etc/profile.d

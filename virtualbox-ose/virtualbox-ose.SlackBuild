@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Slackware build script for virtualbox-ose
+# Slamd64 build script for virtualbox-ose
 
 # Copyright 2008 Heinz Wiesinger <pprkut@liwjatan.at>
 # Copyright 2008 Mauro Giachero <mauro.giachero@gmail.com>
@@ -27,7 +27,7 @@
 
 PRGNAM=virtualbox-ose
 SRCNAM=VirtualBox
-VERSION=2.0.4
+VERSION=2.0.6
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
@@ -48,14 +48,24 @@ GUI=""
 qtgui=""
 
 # Support for the pulseaudio-backend
-if [ "${PULSE:-no}" = "yes" ]; then
-    do_pulse=""
-else
+if [ "${PULSE:-no}" = "no" ]; then   
     do_pulse="--disable-pulse"
+else
+    do_pulse=""  
 fi
 
 # Using the vboxusers-group
 VBOXUSERS=${VBOXUSERS:-yes}
+
+if [ "$VBOXUSERS" = "yes" ]; then                                                                                
+  # Check for vboxusers group here                                                                               
+  if ! grep ^vboxusers: /etc/group 2>&1 > /dev/null; then                                                        
+    echo "  Must have a vboxusers group to run this script."                                                     
+    echo "    # groupadd -g 215 vboxusers"                                                                       
+    echo "  Or something similar."                                                                               
+    exit 1                                                                                                       
+  fi                                                                                                             
+fi
 
 # Enable Hardening - Defaulting to yes as requested by upstream
 if [ "${HARDENING:-yes}" = "yes" ]; then
@@ -104,7 +114,7 @@ else
 fi
 
 # Support for the qt3-frontend
-if [ "${QT3:-yes}" = "yes" ]; then
+if [ "${QT3:-no}" = "yes" ]; then
   qtgui+=" --with-qt-dir=/usr/lib64/qt"
   GUI+=" VirtualBox3"
   mkdir -p $PKG/usr/share/applications
@@ -116,7 +126,7 @@ else
 fi
 
 # Support for the qt4-frontend
-if [ "${QT4:-no}" = "yes" ]; then
+if [ "${QT4:-yes}" = "no" ]; then
   GUI+=" VirtualBox"
   mkdir -p $PKG/usr/share/applications
   cp -f src/VBox/Installer/linux/VirtualBox.desktop $PKG/usr/share/applications/

@@ -1,5 +1,5 @@
 RubyGems is the Ruby standard for publishing and managing third party
-lib64raries.
+libraries.
 
 NOTICE:
  while the rubygems installation will be managed with this SlackBuild,
@@ -11,4 +11,4 @@ NOTICE:
 
 DEPENDENCIES:
 
-* ruby (its comes in a typical slackware installation)
+* ruby (it comes in a typical slackware installation)

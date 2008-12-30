@@ -12,6 +12,16 @@ kdebluetooth4
 virtualbox-kernel
   |-virtualbox-ose
     |-acpica
-    |-dev86
 
+audacity
+  |-wxGTK
+  |-soundtouch
+  |-twolame
+    |-libsndfile
 
+inkscape
+  |-gtkmm
+    |-cairomm
+      |-glibmm
+        |-libsigc++
+  |-gc

@@ -1,4 +1,4 @@
 PRGNAM="transmission"
-VERSION="1.40"
+VERSION="1.42"
 HOMEPAGE="http://www.transmissionbt.com/"
-DOWNLOAD="http://download.m0k.org/transmission/files/transmission-1.40.tar.bz2"
+DOWNLOAD="http://download.m0k.org/transmission/files/transmission-1.42.tar.bz2"

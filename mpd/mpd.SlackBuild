@@ -57,6 +57,8 @@ chmod -R u+w,go+r-w,a-s .
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 LDFLAGS="-L/lib64 -L/usr/lib64" \
+ID3TAG_CFLAGS="-I/usr/include/" \
+ID3TAG_LIBS="-L/usr/lib -lid3tag -lz" \
 ./configure \
   --prefix=/usr \
   --libdir=/usr/lib64 \

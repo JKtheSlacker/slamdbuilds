@@ -1,0 +1,8 @@
+PRGNAM="xdemorse"
+VERSION="1.3"
+HOMEPAGE="http://5b4az.chronos.org.uk/pages/morse.html"
+DOWNLOAD="http://5b4az.chronos.org.uk/pkg/morse/xdemorse/xdemorse-1.3.tar.gz"
+MD5SUM="433107149963012cc4d7afd0cbd54177"
+MAINTAINER="JK Wood"
+EMAIL="joshuakwood@gmail.com"
+APPROVED=""

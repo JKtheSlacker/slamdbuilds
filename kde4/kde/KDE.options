@@ -1,0 +1,16 @@
+# Set default version/arch/build.  You can override these settings
+# in the SlackBuild scripts for each package (koffice, for example,
+# usually has a different version number), or by setting your own
+# environment variables.
+
+[ -z $VERSION ] && export VERSION=4.1.96
+[ -z $BUILD ] && export BUILD=1
+
+. /etc/pkghelpers
+pkghelpers_env
+
+# Use this to set the number of parallel make jobs:
+if [ -z "$NUMJOBS" ]; then
+  export NUMJOBS="-j3"
+fi
+

@@ -1,0 +1,66 @@
+#!/bin/sh
+
+# Build (and install) all KDE packages.
+# Written for Slackware by volkerdi@slackware.com.
+# Modified for KDE4 by Robby Workman <rworkman@slackware.com>
+
+# kdeaccessibility builds plugins for epos, festival, flite, freetts, and
+# hadifix, so they should work with kde if any of those are installed later
+
+# Set the config option variables if they are not already set:
+[ -r ./KDE.options ] && . ./KDE.options
+
+# Get the kde environment variables
+[ -d kdebase ] && . ./kdebase/profile.d/kde.sh
+
+# These are not shipped with kde 4.1.0, and the upstream maintainer
+# requests that we not ship packages of the latest development releases
+# with 4.1.0, so we won't.
+#  kdevplatform \
+#  kdevelop \
+
+# Yes, we know kdebase-workspace is built twice.  kdebase needs the
+#   plasma bits from it, and then we build it again for good measure...
+for module in \
+  kdelibs \
+  kdepimlibs \
+  kdebase-workspace \
+  kdebase \
+  kdebase-workspace \
+  kdebase-runtime \
+  kdeaccessibility \
+  kdeutils \
+  kdemultimedia \
+  kdenetwork \
+  kdeadmin \
+  kdeartwork \
+  kdegames \
+  kdetoys \
+  kdegraphics \
+  kdesdk \
+  kdewebdev \
+  kdepim \
+  kdeedu \
+  kdeplasma-addons \
+  kdebindings \
+  koffice \
+  amarok \
+  guidance-power-manager \
+  kaudiocreator \
+  ktorrent ;
+do
+  cd $module
+  ./$module.SlackBuild
+  if [ $? = 0 ]; then
+    # Yes, I will build with the fresh packages installed:
+    upgradepkg --install-new --reinstall /tmp/${module}-*.tgz
+    # Keep MIME database current:
+    /usr/bin/update-mime-database /usr/share/mime 1> /dev/null 2> /dev/null &
+    rm -rf /tmp/package-${module} /tmp/${module}-$VERSION
+  else
+    echo "${module} failed to build."
+    exit 1
+  fi
+  cd - ;
+done
+

@@ -1,0 +1,5 @@
+PRGNAM="eigen"
+VERSION="1.0.5"
+HOMEPAGE="http://eigen.tuxfamily.org/"
+DOWNLOAD="http://download.tuxfamily.org/eigen/eigen-1.0.5.tar.gz"
+MD5SUM="960d7e5fb6542270eae4d53ca99b607c"

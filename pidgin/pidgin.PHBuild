@@ -22,7 +22,7 @@
 
 
 PKGNAM=pidgin
-VERSION=${VERSION:-2.5.3}
+VERSION=${VERSION:-2.5.4}
 BUILD=${BUILD:-1}
 
 . /etc/pkghelpers

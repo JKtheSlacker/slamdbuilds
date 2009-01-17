@@ -1,0 +1,4 @@
+PRGNAM="rxvt-unicode"
+VERSION="9.06"
+HOMEPAGE="http://software.schmorp.de/pkg/rxvt-unicode.html"
+DOWNLOAD="http://dist.schmorp.de/rxvt-unicode/Attic/rxvt-unicode-9.06.tar.bz2"

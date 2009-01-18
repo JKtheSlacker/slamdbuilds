@@ -5,4 +5,4 @@ Exec=/usr/bin/freedroidRPG
 Icon=/usr/share/freedroidrpg/graphics/paraicon.bmp
 Terminal=false
 Type=Application
-Categories=X-Games;
+Categories=Game;

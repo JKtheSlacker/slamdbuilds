@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+  |-----handy-ruler------------------------------------------------------|
+ht: ht (disassembler)
+ht: 
+ht: ht This program is a file viewer, editor and analyzer for text, binary,
+ht: and (especially) executable files. 
+ht: 
+ht: 
+ht: 
+ht: 
+ht: 
+ht: Homepage: http://hte.sourceforge.net
+ht: 

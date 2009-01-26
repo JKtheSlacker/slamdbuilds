@@ -1,0 +1,4 @@
+This pidgin build is primarily intended for my personal use.
+
+This build strips perl items, and does not include gaim-encryption; as a
+result, the package is trimmed down from that in a stock slamd64 system.

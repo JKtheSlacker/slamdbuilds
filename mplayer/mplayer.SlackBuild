@@ -75,7 +75,6 @@ CFLAGS= \
 ./configure \
   --prefix=/usr \
   --mandir=/usr/man \
-  --libdir=/usr/lib64 \
   --confdir=/etc/mplayer \
   --disable-gui \
   --${do_cpu}able-runtime-cpudetection \

@@ -19,7 +19,7 @@ fi
 
 # Prepare the new configuration files
 config etc/vbox/vbox.cfg.new
-for file in etc/rc.d/rc.vboxdrv.new etc/rc.d/rc.vboxnet.new ; do
+for file in etc/rc.d/rc.vboxdrv.new ; do
   if [ -e $(dirname $file)/$(basename $file .new) -a -x $(dirname $file)/$(basename $file .new) ]; then
     chmod 0755 $file
   else

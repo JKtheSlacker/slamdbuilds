@@ -1,0 +1,8 @@
+PRGNAM="Squeak"
+VERSION="3.9-8"
+HOMEPAGE="http://www.squeak.org/"
+DOWNLOAD="http://ftp.squeak.org/3.9/unix-linux/Squeak-3.9-8.src.tar.gz"
+MD5SUM="645ef7e321c61601c9c70d94fa9417e4"
+MAINTAINER="JK Wood"
+EMAIL="joshuakwood@gmail.com"
+APPROVED=""

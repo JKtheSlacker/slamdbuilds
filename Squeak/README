@@ -11,6 +11,12 @@ To use Squeak, you'll need a vm image.  You can get one
 from the below link:
 http://ftp.squeak.org/3.10/Squeak3.10.2-7179-basic.zip
 
-Simply unzip it into your home directory.  Alternatively,
-you can put it into someplace like /usr/share/squeak and
-set SQUEAK_IMAGE in your environment.
+Simply unzip it into your home directory, and rename or
+symlink it to squeak.image.  Alternatively, you can put 
+it into someplace like /usr/share/squeak and set 
+SQUEAK_IMAGE in your environment.
+
+You'll likely also want the Squeak sources for the vm you
+are using.  For the above image, download
+http://ftp.squeak.org/3.9/SqueakV39.sources.gz and gunzip
+them in /usr/lib64/squeak/3.10-4/.

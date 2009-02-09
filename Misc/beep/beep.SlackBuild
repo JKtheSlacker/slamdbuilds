@@ -16,7 +16,7 @@ BUILD=${BUILD:-1}
 TAG=${TAG:-_S64}
 DISTRO=${DISTRO:-slamd64}
 CWD=$(pwd)
-TMP=${TMP:-/tmp/S64}
+TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}	# Drop the package in /tmp
 

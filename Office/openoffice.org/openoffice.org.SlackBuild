@@ -28,7 +28,7 @@ PRGNAM=openoffice.org
 VERSION=3.0.0
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_ajb}
+TAG=${TAG:-_S64}
 
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}

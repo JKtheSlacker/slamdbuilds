@@ -28,7 +28,7 @@ PRGNAM=wine
 VERSION=1.1.14
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}
+TAG=${TAG:-_S64}
 DISTRO=${DISTRO:-slamd64}
 
 CWD=$(pwd)

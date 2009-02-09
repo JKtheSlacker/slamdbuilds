@@ -24,7 +24,7 @@ PRGNAM=libsndfile
 VERSION=1.0.17
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-2}
-TAG=${TAG:-_SBo}
+TAG=${TAG:-_S64}
 DISTRO=${DISTRO:-slamd64}
 
 CWD=$(pwd)

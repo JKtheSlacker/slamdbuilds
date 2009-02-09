@@ -8,7 +8,7 @@ PRGNAM=jam
 VERSION=2.5
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-2}
-TAG=${TAG:-_SBo}
+TAG=${TAG:-_S64}
 
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}

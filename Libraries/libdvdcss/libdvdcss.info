@@ -2,3 +2,4 @@ PRGNAM="libdvdcss"
 VERSION="1.2.10"
 HOMEPAGE="http://developers.videolan.org/libdvdcss/"
 DOWNLOAD="http://download.videolan.org/pub/libdvdcss/1.2.10/libdvdcss-1.2.10.tar.bz2"
+MAINTAINER:abrouwers@gmail.com

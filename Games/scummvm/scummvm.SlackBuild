@@ -1,0 +1,107 @@
+#!/bin/sh
+
+# Slamd64 build script for scummvm
+
+# Copyright 2006  Halim Issa <yallaone@gmail.com>
+# Copyright 2008  Carlos Corbacho <carlos@strangeworlds.co.uk> (Slamd64 port)
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+# Modified for Slamd64 by JK Wood <joshuakwood@gmail.com>
+
+PRGNAM=scummvm
+VERSION=0.11.0
+ARCH=${ARCH:-x86_64}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+DISTRO=${DISTRO:-slamd64}
+
+PKGARCH=${ARCH}_${DISTRO}
+
+DOCS="AUTHORS COPYING NEWS README TODO"
+
+case "$ARCH" in
+  i486)      SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+             ;;
+  i686)      SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+             ;;
+  s390)      SLKCFLAGS="-O2"
+             ;;
+  powerpc)   SLKCFLAGS="-O2"
+             ;;
+  x86_64)    SLKCFLAGS="-O2 -fPIC"
+             ;;
+  athlon-xp) SLKCFLAGS="-march=athlon-xp -O3 -pipe -fomit-frame-pointer"
+             ;;
+esac
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP || exit 1
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2 || exit 1
+cd $PRGNAM-$VERSION || exit 1
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
+LDFLAGS="-L/lib64 -L/usr/lib64" \
+./configure \
+  --prefix=/usr \
+  --mandir=/usr/man \
+  --disable-debug \
+  || exit 1
+
+make || exit 1
+make install DESTDIR=$PKG || exit 1
+
+strip --strip-unneeded $PKG/usr/bin/scummvm 2> /dev/null
+
+# The .desktop file for the menu is not being installed
+install -D -m 0644 dists/scummvm.desktop \
+  $PKG/usr/share/applications/scummvm.desktop
+
+# Hardcode the location for the .desktop icon
+sed -i s%Icon=%Icon=/usr/share/pixmaps/% \
+  $PKG/usr/share/applications/scummvm.desktop
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a $DOCS  $PKG/usr/doc/$PRGNAM-$VERSION
+# We don't need these - they're redundant
+rm -rf $PKG/usr/share/doc
+
+# Compress the man page(s)
+( cd $PKG/usr/man
+  find . -type f -exec gzip -9 {} \;
+  for i in $( find . -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+)
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$PKGARCH-$BUILD$TAG.tgz

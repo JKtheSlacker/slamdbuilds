@@ -1,0 +1,4 @@
+PRGNAM="gtk-nodoka-engine"
+VERSION="0.7.2"
+HOMEPAGE="https://fedorahosted.org/nodoka/"
+DOWNLOAD="https://fedorahosted.org/releases/n/o/nodoka/gtk-nodoka-engine-0.7.2.tar.gz"

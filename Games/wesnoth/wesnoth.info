@@ -1,0 +1,8 @@
+PRGNAM="wesnoth"
+VERSION="1.4.6"
+HOMEPAGE="http://www.wesnoth.org"
+DOWNLOAD="http://downloads.sourceforge.net/wesnoth/wesnoth-1.4.6.tar.bz2"
+MD5SUM="9e92234b29f062b3779750ba3cd0a71b"  
+MAINTAINER="JK Wood"
+EMAIL="joshuakwood@gmail.com"
+APPROVED=""

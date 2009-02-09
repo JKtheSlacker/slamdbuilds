@@ -1,0 +1,127 @@
+#!/bin/sh
+
+# Slackware build script for mplayer
+
+# Copyright 2006-2008  Robby Workman, Northport, AL, USA
+# All rights reserved.
+#
+# Redistribution and use of this script, with or without modification, is
+# permitted provided that the following conditions are met:
+#
+# 1. Redistributions of this script must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ''AS IS'' AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+# Updated for slamd64, and to an svn pull. 
+
+PRGNAM=mplayer
+VERSION=1.0_rc2_p28450
+ARCH=${ARCH:-custom}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+PKG_VERSION=$VERSION	# This may change later in the script
+CODECSDIR=${CODECSDIR:-/usr/lib64/codecs}
+RUNTIME_CPU=${RUNTIME_CPU:-yes}
+
+if [ "$RUNTIME_CPU" = "yes" ]; then
+    do_cpu="en"
+else
+    do_cpu="dis"
+fi
+
+DVDNAV=${DVDNAV:-no}
+
+if [ "$DVDNAV" = "yes" ]; then
+    do_dvdnav="--disable-dvdread-internal"
+else
+    do_dvdnav=""
+fi
+
+OSDFONTS="Arialuni.ttf arial.ttf DejaVuSans.ttf Vera.ttf"
+LANGUAGES=${LANGUAGES:-"en nl fr de es"}
+
+set -e
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
+cd $PRGNAM-$VERSION
+chown -R root:root .
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+CFLAGS= \
+./configure \
+  --prefix=/usr \
+  --mandir=/usr/man \
+  --confdir=/etc/mplayer \
+  --disable-gui \
+  --${do_cpu}able-runtime-cpudetection \
+  --enable-largefiles \
+  --codecsdir="$CODECSDIR" \
+  --language="$LANGUAGES" \
+  $do_dvdnav
+
+make
+make install DESTDIR=$PKG
+
+( find $PKG | xargs file | grep -e "executable" -e "shared object" \
+  | grep ELF | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null )
+
+( cd $PKG/usr/man
+  find . -type f -exec gzip -9 {} \;
+  for i in $( find . -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+)
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a AUTHORS Copyright LICENSE README DOCS $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+rm -rf $PKG/usr/doc/$PRGNAM-$VERSION/DOCS/man
+
+# Don't clobber an existing config file
+cat etc/example.conf > $PKG/etc/mplayer/mplayer.conf.new
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+# We'll link to one of the standard ttf fonts defined above.
+# Thanks to Eric Hameleers for this code snippet and permission to use it.
+cat << EOF >> $PKG/install/doinst.sh
+# Symlink a default TrueType font for OSD:
+if [ ! -f usr/share/mplayer/subfont.ttf ]; then
+  for font in $OSDFONTS ; do
+    if [ -f usr/share/fonts/TTF/\$font ]; then
+      ( mkdir -p usr/share/mplayer
+	cd usr/share/mplayer 
+        ln -fs /usr/share/fonts/TTF/\$font subfont.ttf 
+      )
+      break
+    fi
+  done
+fi
+EOF
+
+cd $PKG
+chown -R root:root .	# Some files in /usr/share/mplayer are 103:99
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$PKG_VERSION-$ARCH-$BUILD$TAG.tgz

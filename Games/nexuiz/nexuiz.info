@@ -1,0 +1,8 @@
+PRGNAM="nexuiz"
+VERSION="2.4.2"
+HOMEPAGE="http://www.alientrap.org/nexuiz"
+DOWNLOAD="http://downloads.sourceforge.net/nexuiz/nexuiz-242.zip"
+MD5SUM="2ea51368774ca603fd56faebfeac74d7"
+MAINTAINER="JK Wood"
+EMAIL="joshuakwood@gmail.com"
+APPROVED=""

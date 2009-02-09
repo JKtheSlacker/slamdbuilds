@@ -1,0 +1,18 @@
+Music Player Daemon (MPD) allows remote access for playing music (MP3, 
+Ogg Vorbis, FLAC, AAC, Mod, and wave files) and managing playlists. 
+MPD is designed for integrating a computer into a stereo system that 
+provides control for music playback over a local network. It also makes 
+a great desktop music player, especially if you are a console junkie, 
+like frontend options, or restart X often.
+
+NOTE:  Edit the config before running.  If using the init script in /etc/rc.d,
+you should consider changing some variables.  Common practice seems to use:
+
+/var/{lib,log,run}/mpd
+
+for the playlists, logging, and PID (respectively), but the choice is ours.  
+Change the user appropriately, and then issue something along the lines of:
+
+chown -R <your_user>:users /var/{lib,log,run}/mpd
+
+to allow the daemon to run as user.

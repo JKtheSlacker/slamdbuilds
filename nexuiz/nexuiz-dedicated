@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd /usr/share/games/nexuiz
+# for x86:
+#./nexuiz-linux-686-dedicated
+# for x86_64:
+./nexuiz-linux-x86_64-dedicated

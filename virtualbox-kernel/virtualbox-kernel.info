@@ -1,8 +1,0 @@
-PRGNAM="virtualbox-kernel"
-VERSION="2.1.2"
-HOMEPAGE="http://www.virtualbox.org"
-DOWNLOAD="http://www.liwjatan.at/files/src/virtualbox-kernel-2.1.2.tar.bz2"
-MD5SUM="a83ffd97941ed3224b8984eac83ea3d0"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""

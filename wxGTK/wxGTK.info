@@ -1,8 +1,0 @@
-PRGNAM="wxGTK"
-VERSION="2.8.9"
-HOMEPAGE="http://www.wxwidgets.org"
-DOWNLOAD="http://downloads.sourceforge.net/wxwindows/wxGTK-2.8.9.tar.gz"
-MD5SUM="8c845c11b02dc852471a7013eeded5ff"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""

@@ -1,8 +1,0 @@
-PRGNAM="cairomm"
-VERSION="1.6.4"
-HOMEPAGE="http://cairographics.org/cairomm/"
-DOWNLOAD="http://cairographics.org/releases/cairomm-1.6.4.tar.gz"
-MD5SUM="63561c62536173a98f03005dfe55c90e"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""

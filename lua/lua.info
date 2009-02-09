@@ -1,8 +1,0 @@
-PRGNAM="lua"
-VERSION="5.1.4"
-HOMEPAGE="http://www.lua.org"
-DOWNLOAD="http://www.lua.org/ftp/lua-5.1.4.tar.gz"
-MD5SUM="d0870f2de55d59c1c8419f36e8fac150"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""

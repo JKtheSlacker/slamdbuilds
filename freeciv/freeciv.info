@@ -1,8 +1,0 @@
-PRGNAM="freeciv"
-VERSION="2.1.6"
-HOMEPAGE="http://www.freeciv.org"
-DOWNLOAD="http://downloads.sourceforge.net/freeciv/freeciv-2.1.6.tar.bz2"
-MD5SUM="377a44273cdd0c2cab4e1c0a457fc7c7"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""

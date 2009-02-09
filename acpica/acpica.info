@@ -1,8 +1,0 @@
-PRGNAM="acpica"
-VERSION="20080829"
-HOMEPAGE="http://acpica.org"
-DOWNLOAD="http://acpica.org/download/acpica-unix-20080829.tar.gz"
-MD5SUM="ae9da90dfbc68493a3af0ed7961511b6"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""

@@ -1,8 +1,0 @@
-PRGNAM="kdebluetooth4"
-VERSION="0.2"
-HOMEPAGE="http://www.kde-apps.org/content/show.php/kdebluetooth4?content=84761"
-DOWNLOAD="http://downloads.sourceforge.net/kde-bluetooth/kdebluetooth4-0.2.tar.bz2"
-MD5SUM="66abefaf0d7e7f9980071c8519e52574"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""

@@ -1,8 +1,0 @@
-PRGNAM="inkscape"
-VERSION="0.46"
-HOMEPAGE="http://www.inkscape.org/"
-DOWNLOAD="http://downloads.sourceforge.net/inkscape/inkscape-0.46.tar.gz"
-MD5SUM="3bae9034047379012127e52f9b138d32"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""

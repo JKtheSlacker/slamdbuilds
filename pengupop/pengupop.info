@@ -1,8 +1,0 @@
-PRGNAM="pengupop"
-VERSION="2.2.4"
-HOMEPAGE="http://www.junoplay.com/pengupop"
-DOWNLOAD="http://slackbuilds.org/sources/12.2/pengupop-2.2.4.tar.gz"
-MD5SUM="31cb21f9b9f0cc92076a0361b4fea09b"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""

@@ -1,8 +1,0 @@
-PRGNAM="valgrind"
-VERSION="3.3.0"
-HOMEPAGE="http://www.valgrind.org/"
-DOWNLOAD="http://www.valgrind.org/downloads/valgrind-3.3.0.tar.bz2"
-MD5SUM="e5fc39755a714f36b7e5014c1c6d4748"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""

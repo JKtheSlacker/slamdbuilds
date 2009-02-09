@@ -1,8 +1,0 @@
-PRGNAM="mednafen"
-VERSION="0.8.A"
-HOMEPAGE="http://mednafen.sourceforge.net"
-DOWNLOAD="http://downloads.sourceforge.net/mednafen/mednafen-0.8.A.tar.bz2"
-MD5SUM="7911635447a95b559af2eee96825ad9a"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""

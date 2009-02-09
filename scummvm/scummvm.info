@@ -1,8 +1,0 @@
-PRGNAM="scummvm"
-VERSION="0.11.0"
-HOMEPAGE="http://www.scummvm.org/"
-DOWNLOAD="http://downloads.sourceforge.net/scummvm/scummvm-0.11.0.tar.bz2"
-MD5SUM="5066301a182b7e0f1da1eec21c80024f"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""

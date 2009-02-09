@@ -1,8 +1,0 @@
-PRGNAM="gc"
-VERSION="7.1"
-HOMEPAGE="http://www.hpl.hp.com/personal/Hans_Boehm/gc/"
-DOWNLOAD="http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/gc-7.1.tar.gz"
-MD5SUM="2ff9924c7249ef7f736ecfe6f08f3f9b"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""

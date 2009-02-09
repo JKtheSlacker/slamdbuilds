@@ -1,8 +1,0 @@
-PRGNAM="blender"
-VERSION="2.48a"
-HOMEPAGE="http://blender.org"
-DOWNLOAD="http://download.blender.org/release/Blender2.48a/blender-2.48a-linux-glibc236-py25-x86_64.tar.bz2"
-MD5SUM="23abcbdcc8f54d84fe9436a8f1ac46cb"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""

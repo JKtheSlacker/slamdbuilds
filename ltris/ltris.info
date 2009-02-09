@@ -1,8 +1,0 @@
-PRGNAM="ltris"
-VERSION="1.0.12"
-HOMEPAGE="http://lgames.sourceforge.net/index.php?project=LTris"
-DOWNLOAD="http://downloads.sourceforge.net/lgames/ltris-1.0.12.tar.gz"
-MD5SUM="53b00c17a05c438602a52009e65ebde2"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""

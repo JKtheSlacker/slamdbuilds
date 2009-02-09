@@ -1,9 +1,0 @@
-PRGNAM="gst-plugins-ugly"
-VERSION="0.10.10"
-HOMEPAGE="http://gstreamer.freedesktop.org/modules/gst-plugins-ugly.html"
-DOWNLOAD="http://gstreamer.freedesktop.org/src/gst-plugins-ugly/gst-plugins-ugly-0.10.10.tar.bz2"
-MD5SUM="031205d5599fce73fc36766f928b2515"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""
-

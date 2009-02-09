@@ -1,8 +1,0 @@
-PRGNAM="glibmm"
-VERSION="2.16.4"
-HOMEPAGE="http://www.gtkmm.org/"
-DOWNLOAD="http://ftp.gnome.org/pub/GNOME/sources/glibmm/2.16/glibmm-2.16.4.tar.bz2"
-MD5SUM="fe2e91fa93759ffc812e80ca50ace233"
-MAINTAINER="JK Wood"
-EMAIL="joshuakwood@gmail.com"
-APPROVED=""

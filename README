@@ -1,5 +1,8 @@
-This is my personal repo of SlackBuilds for Slamd64.  I'll be putting my
-'builds here until the SlamdBuilds project comes live.  At that point,
-this will become a testing repo.
+This is the preliminary, probationary "official unofficial"
+SlackBuild repo for Slamd64.  The builds here have been
+vetted and work.  They have been tested on Slamd64 12.2,
+so your mileage may vary with older versions.
 
--JK
+If you have a question or comment about any of the builds
+here, please feel free to contact the maintainer listed in
+the info file for that build.

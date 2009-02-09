@@ -9,7 +9,7 @@ PRGNAM=transmission
 VERSION=1.42
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}
+TAG=${TAG:-_S64}
 
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}

@@ -9,7 +9,7 @@ PRGNAM=flash-player-plugin
 VERSION=10
 ARCH=x86_64
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}
+TAG=${TAG:-_S64}
 
 # If you use or intend to use Opera at some point, and you want
 # this plugin available to it, then pass "yes" as the value to this

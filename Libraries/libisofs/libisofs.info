@@ -2,3 +2,4 @@ PRGNAM="libisofs"
 VERSION="0.6.12"
 HOMEPAGE="http://libburnia-project.org/wiki/Libisofs"
 DOWNLOAD="http://files.libburnia-project.org/releases/libisofs-0.6.12.tar.gz"
+MAINTAINER:abrouwers@gmail.com

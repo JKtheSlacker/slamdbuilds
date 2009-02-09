@@ -29,7 +29,7 @@ PRGNAM=epdfview
 VERSION=0.1.6
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-2}
-TAG=${TAG=_SBo}
+TAG=${TAG=_S64}
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SBo}
 PKG=$TMP/package-epdfview

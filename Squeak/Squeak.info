@@ -1,0 +1,8 @@
+PRGNAM="Squeak"
+VERSION="3.10-4"
+HOMEPAGE="http://www.squeak.org/"
+DOWNLOAD="http://squeakvm.org/unix/release/Squeak-3.10-4.src.tar.gz"
+MD5SUM="bd8c32860d7e80540a497149a387a898"
+MAINTAINER="JK Wood"
+EMAIL="joshuakwood@gmail.com"
+APPROVED=""

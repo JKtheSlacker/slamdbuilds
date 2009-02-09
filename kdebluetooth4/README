@@ -1,0 +1,20 @@
+Kdebluetooth4 is the bluetooth framework for KDE4. It adds 
+a lot of bluetooth abilities to the KDE4 desktop.
+
+Current features:
+
+* Trayicon to manage all functions
+* Passkey and Authorization Agent to handle requests from 
+  remote devices
+* Bluetooth Adapter configuration
+* Bluetooth Device-Manager
+* Bluetooth Device Wizard, to add new Devices (ATM, only 
+  input devices)
+* KBlueLock, to lock your screen, when your mobile phone is
+  out of scope and to unlock when it's back again
+* Send Files to remote devices (obex-data-server)
+* Receive Files from remote devices (obex-data-server)
+
+Kdebluetooth4 requires obex-data-server which is also 
+available in this repo.  It also depends on KDE4, now
+available in /testing in -current.

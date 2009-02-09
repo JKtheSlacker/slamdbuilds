@@ -1,0 +1,56 @@
+#!/bin/sh
+
+## Written by hollywoodb (hollywoodb@fastmail.fm)
+# Modified by the SlackBuilds.org project
+# Script maintained by Robby Workman <rworkman@slackbuilds.org>
+# Heavily Modified for Slamd64 by JK Wood <joshuakwood@gmail.com>
+
+PRGNAM=flash-player-plugin
+VERSION=10
+ARCH=x86_64
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SBo}
+
+# If you use or intend to use Opera at some point, and you want
+# this plugin available to it, then pass "yes" as the value to this
+# variable:    USE_OPERA=yes ./flash-player-plugin.SlackBuild
+# Note that this should *NOT* be needed if you installed Opera using
+# the SlackBuilds.org build script, as we do a simple patch there to
+# make it look in /usr/lib64/mozilla/plugins
+USE_OPERA=${USE_OPERA:-no}
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SBo}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}  
+
+set -e
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+mkdir -p install_flash_player_10_linux
+tar xvf $CWD/libflashplayer-10.0.d21.1.linux-x86_64.so.tar.gz -C install_flash_player_10_linux
+cd install_flash_player_10_linux
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+
+mkdir -p $PKG/usr/lib64/mozilla/plugins
+install -m 0755 libflashplayer.so $PKG/usr/lib64/mozilla/plugins
+
+# If the user wants an opera plugin installed, then we'll do that too.
+if [ ! "$USE_OPERA" = "no" ]; then
+  mkdir -p $PKG/usr/lib64/opera/plugins
+  cd $PKG/usr/lib64/opera/plugins
+    ln -s /usr/lib64/mozilla/plugins/libflashplayer.so .
+  cd -
+fi
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+cd $PKG
+/sbin/makepkg -l y -c n -p $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.tgz

@@ -1,0 +1,27 @@
+I'll be nice and map out dependencies for you here.  It's
+still recommended to read the README for each package -
+I do make mistakes from time to time, and this is mostly
+for my own benefit.  Format is a tree view, starting with
+the base package and mapping dependencies below that.
+If I don't list a package here, that's because it's happy
+by itself.
+
+kdebluetooth4
+  |-obex-data-server
+
+virtualbox-kernel
+  |-virtualbox-ose
+    |-acpica
+
+audacity
+  |-wxGTK
+  |-soundtouch
+  |-twolame
+    |-libsndfile
+
+inkscape
+  |-gtkmm
+    |-cairomm
+      |-glibmm
+        |-libsigc++
+  |-gc

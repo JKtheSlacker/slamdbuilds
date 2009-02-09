@@ -1,0 +1,8 @@
+PRGNAM="gparted"
+VERSION="0.4.1"
+HOMEPAGE="http://gparted.sourceforge.net/"
+DOWNLOAD="http://downloads.sourceforge.net/gparted/gparted-0.4.1.tar.bz2"
+MD5SUM="38762b12b8dfeb0518e24b470b1b5675"
+MAINTAINER="Erik Hanson"
+EMAIL="erik@slackbuilds.org"
+APPROVED="dsomero"

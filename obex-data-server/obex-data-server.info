@@ -1,0 +1,8 @@
+PRGNAM="obex-data-server"
+VERSION="0.4.2"
+HOMEPAGE="http://wiki.muiline.com/obex-data-server"
+DOWNLOAD="http://tadas.dailyda.com/software/obex-data-server-0.4.2.tar.gz"
+MD5SUM="b91594e2df8135291e2a9958ef88683f"
+MAINTAINER="JK Wood"
+EMAIL="joshuakwood@gmail.com"
+APPROVED=""

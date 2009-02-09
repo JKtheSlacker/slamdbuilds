@@ -1,0 +1,16 @@
+An Xfire plugin for Pidgin
+
+Gfire features:
+
+    * Friend's list
+    * Add & Remove friends
+    * View friend's current game (games list updated weekly)
+    * View friend's profiles
+    * Join friend's server
+    * Detects games and logs game time
+    * Set your status as "Away from Keyboard (AFK)"
+    * Set custom status
+
+NOTE: Each user who wishes to use this plugin needs to copy
+/usr/doc/gfire-0.7.1/gfire_games.xml to ~/.purple
+

@@ -2,5 +2,4 @@ PRGNAM="libburn"
 VERSION="0.6.0pl01"
 HOMEPAGE="http://libburnia-project.org/wiki/Libburn"
 DOWNLOAD="http://files.libburnia-project.org/releases/libburn-0.6.0.pl01.tar.gz"
-
 MAINTAINER="abrouwers@gmail.comg"

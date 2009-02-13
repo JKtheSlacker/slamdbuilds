@@ -1,0 +1,8 @@
+PRGNAM="libtorrent"
+VERSION="0.12.0"
+HOMEPAGE="http://libtorrent.rakshasa.no/"
+DOWNLOAD="http://libtorrent.rakshasa.no/downloads/libtorrent-0.12.0.tar.gz"
+MD5SUM="76c818b095248ea9e4b140fff4e2fa2a"
+MAINTAINER="JK Wood"
+EMAIL="joshuakwood@gmail.com"
+APPROVED=""

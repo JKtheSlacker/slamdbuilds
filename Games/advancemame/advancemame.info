@@ -5,4 +5,4 @@ DOWNLOAD="http://prdownloads.sourceforge.net/advancemame/advancemame-0.106.0.tar
 MD5SUM="aa097a4a9046124e17aa83a215e454ea"
 MAINTAINER="JK Wood"
 EMAIL="joshuakwood@gmail.com"
-APPROVED=""
+APPROVED="jkwood"

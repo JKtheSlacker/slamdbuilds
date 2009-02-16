@@ -5,4 +5,4 @@ DOWNLOAD="http://ibiblio.org/pub/linux/system/emulators/wine/wine-1.1.14.tar.bz2
 MD5SUM="5becf91455ef1d426e39cda34e6e7e81"
 MAINTAINER="JK Wood"
 EMAIL="joshuakwood@gmail.com"
-APPROVED=""
+APPROVED="jkwood"

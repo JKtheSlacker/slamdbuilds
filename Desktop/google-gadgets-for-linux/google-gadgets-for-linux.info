@@ -5,4 +5,4 @@ DOWNLOAD="http://google-gadgets-for-linux.googlecode.com/files/google-gadgets-fo
 MD5SUM="0ef0a62e0a575388084a77759b646718"
 MAINTAINER="JK Wood"
 EMAIL="joshuakwood@gmail.com"
-APPROVED=""
+APPROVED="jkwood"

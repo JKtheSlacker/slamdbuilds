@@ -28,11 +28,11 @@ PRGNAM=bzr
 VERSION=1.10
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_S64}
+TAG=${TAG:-_SB64}
 DISTRO=${DISTRO:-slamd64}
 
 CWD=$(pwd)
-TMP=${TMP:-/tmp/SBo}
+TMP=${TMP:-/tmp/SB64}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 

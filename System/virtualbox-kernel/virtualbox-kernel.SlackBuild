@@ -30,7 +30,7 @@ PRGNAM=virtualbox-kernel
 VERSION=${VERSION:-2.1.2}
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_S64}
+TAG=${TAG:-_SB64}
 DISTRO=${DISTRO}
 
 PKGARCH=${ARCH}_${DISTRO}
@@ -40,7 +40,7 @@ KERNELPATH=${KERNELPATH:-/lib/modules/$KERNELVERSION/build}
 PKG_VERS=${VERSION}_$(echo $KERNELVERSION | tr - _)
 
 CWD=$(pwd)
-TMP=${TMP:-/tmp/SBo}
+TMP=${TMP:-/tmp/SB64}
 PKG=${PKG:-$TMP/package-$NAME}
 OUTPUT=${OUTPUT:-/tmp}
 

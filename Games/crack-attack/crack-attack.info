@@ -5,4 +5,4 @@ DOWNLOAD="http://savannah.nongnu.org/download/crack-attack/crack-attack-1.1.14.t
 MD5SUM="77bfcb38a293e87fd0d0eab05bae8177"
 MAINTAINER="JK Wood"
 EMAIL="joshuakwood@gmail.com"
-APPROVED=""
+APPROVED="jkwood"

@@ -5,4 +5,4 @@ DOWNLOAD="http://download.blender.org/release/Blender2.48a/blender-2.48a-linux-g
 MD5SUM="23abcbdcc8f54d84fe9436a8f1ac46cb"
 MAINTAINER="JK Wood"
 EMAIL="joshuakwood@gmail.com"
-APPROVED=""
+APPROVED="jkwood"

@@ -5,4 +5,4 @@ DOWNLOAD="http://download.eclipse.org/eclipse/downloads/drops/R-3.4.1-2008091117
 MD5SUM="e068a144117bf83a3a4ef62022f47af6"
 MAINTAINER="JK Wood"
 EMAIL="joshuakwood@gmail.com"
-APPROVED=""
+APPROVED="jkwood"

@@ -5,4 +5,4 @@ DOWNLOAD="http://linux.dell.com/libsmbios/download/libsmbios/libsmbios-0.13.10/l
 MD5SUM="23faf207803e7249be7662697f8218a9"
 MAINTAINER="JK Wood"
 EMAIL="joshuakwood@gmail.com"
-APPROVED=""
+APPROVED="jkwood"

@@ -5,4 +5,4 @@ DOWNLOAD="http://ftp.gnome.org/pub/GNOME/sources/gtkmm/2.12/gtkmm-2.12.7.tar.bz2
 MD5SUM="ad199f4a392799134c128deab48fee30"
 MAINTAINER="JK Wood"
 EMAIL="joshuakwood@gmail.com"
-APPROVED=""
+APPROVED="jkwood"

@@ -5,4 +5,4 @@ DOWNLOAD="http://downloads.sourceforge.net/kde-bluetooth/kdebluetooth4-0.2.tar.b
 MD5SUM="66abefaf0d7e7f9980071c8519e52574"
 MAINTAINER="JK Wood"
 EMAIL="joshuakwood@gmail.com"
-APPROVED=""
+APPROVED="jkwood"

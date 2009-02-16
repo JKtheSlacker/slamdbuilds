@@ -5,5 +5,4 @@ DOWNLOAD="http://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-0
 MD5SUM="ff555a86e74a9249e56b43405c8df3e4"
 MAINTAINER="JK Wood"
 EMAIL="joshuakwood@gmail.com"
-APPROVED=""
-
+APPROVED="jkwood"

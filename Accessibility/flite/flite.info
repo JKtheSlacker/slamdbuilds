@@ -5,4 +5,4 @@ DOWNLOAD="http://fife.speech.cs.cmu.edu/flite/packed/flite-1.3/flite-1.3-release
 MD5SUM="ae0aca1cb7b4801f4372f3a75a9e52b5"
 MAINTAINER="JK Wood"
 EMAIL="joshuakwood@gmail.com"
-APPROVED=""
+APPROVED="jkwood"

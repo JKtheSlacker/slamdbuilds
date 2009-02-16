@@ -5,4 +5,4 @@ DOWNLOAD="http://slackware.osuosl.org/slackware-12.2/source/d/subversion/subvers
 MD5SUM="037d1ed7a313631d50defdc3cf727415"
 MAINTAINER="JK Wood"
 EMAIL="joshuakwood@gmail.com"
-APPROVED=""
+APPROVED="jkwood"

@@ -5,4 +5,4 @@ DOWNLOAD="http://stuff.mit.edu/afs/sipb/project/ghc/src/tarfiles/openal-0.0.8.ta
 MD5SUM="641cf53761f35ee979f3e888614797a0"
 MAINTAINER="JK Wood"
 EMAIL="joshuakwood@gmail.com"
-APPROVED=""
+APPROVED="jkwood"

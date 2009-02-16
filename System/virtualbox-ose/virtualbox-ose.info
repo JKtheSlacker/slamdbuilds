@@ -5,4 +5,4 @@ DOWNLOAD="http://download.virtualbox.org/virtualbox/2.1.2/VirtualBox-2.1.2-OSE.t
 MD5SUM="455253532b5128bb5c2ff4c76b9751a7"
 MAINTAINER="JK Wood"
 EMAIL="joshuakwood@gmail.com"
-APPROVED=""
+APPROVED="jkwood"

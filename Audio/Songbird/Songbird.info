@@ -5,4 +5,4 @@ DOWNLOAD="http://download.songbirdnest.com/installer/linux/x86_64/Songbird_1.0.0
 MD5SUM="65288812e77ea8d43a07e313994acf11" 
 MAINTAINER="JK Wood"
 EMAIL="joshuakwood@gmail.com"
-APPROVED=""
+APPROVED="jkwood"

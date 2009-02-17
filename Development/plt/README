@@ -1,0 +1,17 @@
+PLT Scheme is an innovative programming language that 
+builds on a rich academic and practical tradition.
+
+It is suitable for implementation tasks ranging from 
+scripting to application development, including GUIs, 
+web services, etc.
+
+It includes the DrScheme programming environment, a 
+virtual machine with a just-in-time compiler, tools for 
+creating stand-alone executables, the PLT Scheme web 
+server, extensive libraries, documentation for both 
+beginners and experts, and more.
+
+It supports the creation of new programming languages 
+through a rich, expressive syntax system. Example languages
+include Typed Scheme, ACL2, FrTime, Lazy Scheme, and 
+ProfessorJ (which is a pedagogical dialect of Java).

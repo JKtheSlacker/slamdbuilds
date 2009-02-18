@@ -1,0 +1,8 @@
+PRGNAM="xqf"
+VERSION="1.0.5"
+HOMEPAGE="http://www.linuxgames.com/xqf/"
+DOWNLOAD="http://internap.dl.sourceforge.net/sourceforge/xqf/xqf-1.0.5.tar.gz"
+MD5SUM="a88cecba6abb6349107ab135f1009946"
+MAINTAINER="Matt Hayes"
+EMAIL="dominian@slackadelic.com"
+APPROVED="jkwood"

@@ -19,5 +19,5 @@ upgrading, or refuses to scan for media, backup and delete both
 Songbird requires the following dependencies: gst-plugins-good, 
 gst-plugins-bad,gst-plugins-ugly. 
 
-The build scripts for all these are available at SlackBuilds.org.
+The build scripts for all these are available at builds.slamd64.com.
 

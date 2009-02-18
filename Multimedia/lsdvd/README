@@ -3,4 +3,4 @@ provides output about the types of video and audio tracks, subtitles
 etc... output is available in a number of formats including human
 readable, perl, ruby or xml.
 
-lsdvd depends on libdvdread, also available on slackbuilds.org
+lsdvd depends on libdvdread, also available on builds.slamd64.com.

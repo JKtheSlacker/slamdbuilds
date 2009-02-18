@@ -8,4 +8,4 @@ direct XML editing, and more. It imports formats such as JPEG, PNG, TIFF, and
 others and exports PNG as well as multiple vector-based formats.
 
 Inkscape requires boost, libsigc++, glibmm, gtkmm (which requires cairomm), 
-and gc,  all of which are available at SlackBuilds.org.
+and gc,  all of which are available at builds.slamd64.com.

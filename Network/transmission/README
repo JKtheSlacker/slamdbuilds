@@ -2,6 +2,5 @@ Transmission is a lightweight open source BitTorrent client,
 providing useful functionality without feature bloat. It consists
 of a daemon, a GTK+ and a CLI client.
 
-Dependencies: libevent (available at SlackBuilds.org) is required,
-  but transmission will use a built-in libevent if you don't have
-  it installed already.
+Dependencies: libevent is required, but transmission will use a 
+  built-in libevent if you don't have it installed already.

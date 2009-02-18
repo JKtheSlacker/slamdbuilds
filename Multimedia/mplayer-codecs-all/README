@@ -1,5 +1,5 @@
 This script repackages the all-20071007.tar.bz2 codecs archive 
-distributed by MPlayer.  These codecs install to /usr/lib/codecs/ 
+distributed by MPlayer.  These codecs install to /usr/lib64/codecs/ 
 
-When compiling MPlayer, use /usr/lib/codecs as the values for 
+When compiling MPlayer, use /usr/lib64/codecs as the values for 
 the codecs variable.

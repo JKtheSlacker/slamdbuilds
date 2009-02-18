@@ -68,7 +68,7 @@ LDFLAGS="-L/lib64 -L/usr/lib64" \
   --docdir=/usr/doc/$PRGNAM-$VERSION \
   --htmldir=/usr/doc/$PRGNAM-$VERSION/html \
   --enable-static=no \
-  --build=$ARCH-slackware-linux
+  --build=$ARCH-$DISTRO-linux
 
 make
 make install DESTDIR=$PKG

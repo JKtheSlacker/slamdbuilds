@@ -69,7 +69,7 @@ LDFLAGS="-L/lib64 -L/usr/lib64" \
   --libdir=/usr/lib64 \
   --docdir=/usr/doc/$PRGNAM-$VERSION \
   --disable-static \
-  --build=$ARCH-slackware-linux
+  --build=$ARCH-$DISTRO-linux
 
 make
 make install-strip DESTDIR=$PKG

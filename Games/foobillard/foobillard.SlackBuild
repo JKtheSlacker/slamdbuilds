@@ -69,7 +69,7 @@ LDFLAGS="-L/lib64 -L/usr/lib64" \
   --sysconfdir=/etc \
   --localstatedir=/var \
   --libdir=/usr/lib64 \
-  --build=$ARCH-slackware-linux 
+  --build=$ARCH-$DISTRO-linux 
 
 make
 make install-strip DESTDIR=$PKG

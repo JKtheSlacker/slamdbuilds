@@ -1,0 +1,8 @@
+PRGNAM="mono"
+VERSION="2.0.1"
+HOMEPAGE="http://www.mono-project.com"
+DOWNLOAD="http://ftp.novell.com/pub/mono/sources/mono/mono-2.0.1.tar.bz2"
+MD5SUM="60ab4d1d1990826578891e90cd560fa0"
+MAINTAINER="JK Wood"
+EMAIL="joshuakwood@gmail.com"
+APPROVED="jkwood"

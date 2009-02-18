@@ -6,7 +6,7 @@
 # Updated to slamd64.
 
 PRGNAM=transmission
-VERSION=1.42
+VERSION=1.50
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SB64}

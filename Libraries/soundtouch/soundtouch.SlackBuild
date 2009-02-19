@@ -78,8 +78,8 @@ LDFLAGS="-L/lib64 -L/usr/lib64" \
     --enable-shared \
     --disable-static \
     --localstatedir=/var \
-  --build=$ARCH-slackware-linux \
-  --host=$ARCH-slackware-linux
+  --build=$ARCH-$DISTRO-linux \
+  --host=$ARCH-$DISTRO-linux
 
 make \
   pkgdocdir="/usr/doc/$PRGNAM-$VERSION"

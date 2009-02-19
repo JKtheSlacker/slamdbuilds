@@ -49,8 +49,8 @@ LDFLAGS="-L/lib64 -L/usr/lib64" \
   --sysconfdir=/etc \
   --libdir=/usr/lib64 \
   --localstatedir=/var/lib/lgames \
-  --build=$ARCH-slackware-linux \
-  --host=$ARCH-slackware-linux
+  --build=$ARCH-$DISTRO-linux \
+  --host=$ARCH-$DISTRO-linux
 
 make
 make install DESTDIR=$PKG

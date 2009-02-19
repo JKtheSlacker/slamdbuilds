@@ -43,7 +43,7 @@ LDFLAGS="-L/lib64 -L/usr/lib64" \
 ./configure \
   --prefix=/usr \
   --libdir=/usr/lib64 \
-  --build=$ARCH-slackware-linux
+  --build=$ARCH-$DISTRO-linux
 
 make
 make install DESTDIR=$PKG

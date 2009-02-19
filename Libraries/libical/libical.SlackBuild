@@ -77,8 +77,8 @@ LDFLAGS="-L/lib64 -L/usr/lib64" \
   --enable-cxx \
   --enable-python \
   --${do_java}able-java \
-  --build=$ARCH-slackware-linux \
-  --host=$ARCH-slackware-linux
+  --build=$ARCH-$DISTRO-linux \
+  --host=$ARCH-$DISTRO-linux
 
 make
 make install-strip DESTDIR=$PKG

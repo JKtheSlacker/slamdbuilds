@@ -84,7 +84,7 @@ LDFLAGS="-L/lib64 -L/usr/lib64" \
   --with-zlib=/usr \
   --with-pic \
   --with-ssl \
-  --build=$ARCH-slackware-linux
+  --build=$ARCH-$DISTRO-linux
 
 # Python bindings
 make swig-py

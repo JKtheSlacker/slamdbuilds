@@ -1,0 +1,8 @@
+PRGNAM="xfce4-cpufreq-plugin"
+VERSION="0.0.1"
+HOMEPAGE="http://goodies.xfce.org/"
+DOWNLOAD="http://goodies.xfce.org/releases/xfce4-cpufreq-plugin/xfce4-cpufreq-plugin-0.0.1.tar.gz"
+MD5SUM="7ad41541d8065aab941de7d62857aa8b"
+MAINTAINER="Jonathan Larsen (agentc0re)"
+EMAIL="agentc0re@learnix.net"
+APPROVED="abrouwers"

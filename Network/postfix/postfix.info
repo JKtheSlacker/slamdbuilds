@@ -1,0 +1,7 @@
+PRGNAM="postfix"
+VERSION="2.5.6"
+HOMEPAGE="http://www.postfix.org/"
+DOWNLOAD="http://postfix.energybeam.com/source/official/postfix-2.5.6.tar.gz"
+MD5SUM="ec2cb63b53f5f36c3ca91da8f3bc9407"
+MAINTAINER="Matt Hayes"
+EMAIL="dominian@slackadelic.com"

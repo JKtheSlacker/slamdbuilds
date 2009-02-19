@@ -30,9 +30,9 @@ SRCNAM=xfce4-cpu-freq-plugin
 VERSION=0.0.1
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_SBo}
+TAG=${TAG:-_SB64}
 CWD=$(pwd)
-TMP=${TMP:-/tmp/SBo}
+TMP=${TMP:-/tmp/SB64}
 PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 

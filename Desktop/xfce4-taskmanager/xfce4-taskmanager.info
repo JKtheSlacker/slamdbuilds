@@ -1,0 +1,8 @@
+PRGNAM="xfce4-taskmanager"
+VERSION="0.4.1"
+HOMEPAGE="http://goodies.xfce.org/"
+DOWNLOAD="http://goodies.xfce.org/releases/xfce4-taskmanager/xfce4-taskmanager-0.4.1.tar.bz2"
+MD5SUM="4ed599faf6b734b2d2e7be16adf0b2d9"
+MAINTAINER="Jonathan Larsen (agentc0re)"
+EMAIL="agentc0re@learnix.net"
+APPROVED="abrouwers"

@@ -1,0 +1,8 @@
+PRGNAM="linuxwacom"
+VERSION="0.8.2"
+HOMEPAGE="http://linuxwacom.sourceforge.net/"
+DOWNLOAD="http://downloads.sourceforge.net/linuxwacom/linuxwacom-0.8.2.tar.bz2"
+MD5SUM="cb0647197556c3ab9079b37966a5adc1"
+MAINTAINER="JK Wood"
+EMAIL="joshuakwood@gmail.com"
+APPROVED="jkwood"

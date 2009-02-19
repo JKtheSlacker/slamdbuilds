@@ -2,3 +2,7 @@ XQF is a game server browser and launcher for Unix/X11
 for many popular games such as the Quake series, Unreal
 Tournament series, Half-Life etc. XQF is a front-end to 
 QStat, a program by Steve Jankowski and uses the GTK+ toolkit.
+
+
+This program requires qstat which is also available from
+http://builds.slamd64.com

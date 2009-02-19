@@ -28,8 +28,8 @@ config etc/postfix/virtual.new
 config etc/rc.d/rc.postfix.new
 
 # This is an incompatability with the sendmail package
-( cd usr/lib; rm -f sendmail )
-( cd usr/lib; ln -s /usr/sbin/sendmail sendmail)
+( cd usr/lib64; rm -f sendmail )
+( cd usr/lib64; ln -s /usr/sbin/sendmail sendmail)
 
 # This will set the permissions on all postfix files correctly
 postfix set-permissions

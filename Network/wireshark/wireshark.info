@@ -1,0 +1,8 @@
+PRGNAM="wireshark"
+VERSION="1.0.6"
+HOMEPAGE="http://www.wireshark.org/"
+DOWNLOAD="http://www.wireshark.org/download/src/wireshark-1.0.6.tar.gz"
+MD5SUM="29cf348676ae237189c13719dcabf858"
+MAINTAINER="Fred Emmott"
+EMAIL="mail@fredemmott.co.uk"
+APPROVED="fred"

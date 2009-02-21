@@ -1,0 +1,8 @@
+PRGNAM="xvidcore"
+VERSION="1.2.1"
+HOMEPAGE="http://www.xvid.org/"
+DOWNLOAD="http://downloads.xvid.org/downloads/xvidcore-1.2.1.tar.gz"
+MD5SUM="3f57b3e153687fddefc9ccdf0dc737b7"
+MAINTAINER="Andrew Brouwers"
+EMAIL="abrouwers@gmail.com"
+APPROVED="abrouwers"

@@ -1,0 +1,12 @@
+This script builds dovecot with support for SSL. As such, you must have
+openssl installed - openssl-solibs is not enough in itself to meet this
+requirement.  Additionally, dovecot will be compiled with POP3 support.
+Unfortunately, dovecot does not have a man page at this time, so you'll
+have to find your documentation elsewhere.  A few examples are included
+in /usr/doc/dovecot-1.1.11.  The dovecot team maintains a wiki that may 
+prove useful:  http://wiki.dovecot.org
+
+You should create a dovecot user to run the login processes on your server. 
+
+
+This script ported from slackbuilds.org by Matt Hayes dominian@slackadelic.com

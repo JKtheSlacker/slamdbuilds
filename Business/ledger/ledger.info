@@ -1,6 +1,6 @@
 PRGNAM="ledger"
 VERSION="2.5"
-HOMEPAGE="http://www.newartisans.com/ledger.html"
+HOMEPAGE="http://wiki.github.com/jwiegley/ledger"
 DOWNLOAD="http://downloads.sourceforge.net/ledger/ledger-2.5.tar.gz"
 MD5SUM="ef2ac2e9942ecddfc01cc6ae42e264e9"
 MAINTAINER="JK Wood"

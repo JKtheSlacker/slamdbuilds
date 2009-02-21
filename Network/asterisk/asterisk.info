@@ -5,3 +5,4 @@ DOWNLOAD="http://downloads.digium.com/pub/asterisk/releases/asterisk-1.4.23.1.ta
 MD5SUM="4788954a93f5fbf78e55e2aa6e03329f"
 MAINTAINER="Matt Hayes"
 EMAIL="dominian@slackadelic.com"
+APPROVED="jkwood"

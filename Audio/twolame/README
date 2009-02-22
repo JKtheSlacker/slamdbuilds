@@ -4,6 +4,6 @@ LAME (a MPEG Layer 3 encoder). The frontend takes very similar
 command line options to LAME, and the backend library has a very
 similar API to LAME.
 
-You'll need to have libsndfile (also available from SlackBuilds.org)
-installed if you want to build the twolame frontend (which you'll
-almost certainly want).  :)
+You'll need to have libsndfile (also available from 
+builds.slamd64.com) installed if you want to build the twolame 
+frontend (which you'll almost certainly want).  :)

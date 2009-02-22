@@ -1,0 +1,18 @@
+QStat is a command-line program, written in C, that
+gathers real-time statistics from Internet game servers.
+Most supported games are of the first person shooter variety 
+(Half-Life, Quake, Battlefield etc)
+
+    *  Supports Windows 32bit, Linux, and most Unixes
+    * Comes with C source code and a binary for Windows
+    * Supports old Quake (NetQuake), QuakeWorld, Hexen II, HexenWorld, 
+      Quake II, Quake III, Quake 4, Unreal/UT, Turok2, Sin, Half-Life, 
+      Shogo, Tribes, Tribes 2, BFRIS, Kingpin, Heretic II servers,
+      Soldier of Fortune, Battlefield 2/2142, Half-Life, ETQW and a lot more!
+    * Can display all available statistics, including player info and server rules
+    * Output templates for automatic HTML generation
+    * Raw/XML display mode for integration with custom server browsers
+    * Built-in host name cache
+    * Sort by ping time, game, or both
+    * More options than you can wiggle a mouse at
+

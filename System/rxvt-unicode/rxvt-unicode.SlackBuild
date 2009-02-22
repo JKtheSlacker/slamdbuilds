@@ -79,7 +79,7 @@ CXXFLAGS="$SLKCFLAGS" \
   --enable-rxvt-scroll \
   --enable-next-scroll \
   --enable-xterm-scroll \
-  --disable-perl \
+  --enable-perl \
   --enable-plain-scroll \
   --enable-xim \
   --enable-iso14755 \
@@ -93,11 +93,11 @@ CXXFLAGS="$SLKCFLAGS" \
   --enable-utmp \
   --enable-wtmp \
   --enable-lastlog \
-  --build=$ARCH-slamd64-linux \
-  --host=$ARCH-slamd64-linux
+  --build=$ARCH-slamd64-linux
 
 make
-make install DESTDIR=$PKG
+mkdir -p $PKG/usr/share/terminfo
+TERMINFO=$PKG/usr/share/terminfo make install DESTDIR=$PKG
 
 ( cd $PKG
   find . | xargs file | grep "executable" | grep ELF | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true

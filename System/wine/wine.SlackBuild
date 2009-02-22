@@ -93,7 +93,7 @@ LDFLAGS="-L/lib -L/usr/lib" \
   --libdir=/usr/lib \
   --docdir=/usr/doc/$PRGNAM-$VERSION \
   --${do_opengl}-opengl \
-  --build=$ARCH-slackware-linux
+  --build=$ARCH-$DISTRO-linux
 
 make depend
 make

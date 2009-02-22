@@ -1,0 +1,8 @@
+PRGNAM="xfce4-xmms-plugin"
+VERSION="0.5.1"
+HOMEPAGE="http://goodies.xfce.org/"
+DOWNLOAD="http://goodies.xfce.org/releases/xfce4-xmms-plugin/xfce4-xmms-plugin-0.5.1.tar.bz2"
+MD5SUM="e2e48ba8f2de32e4fd7ab09083458e3f"
+MAINTAINER="Jonathan Larsen (agentc0re)"
+EMAIL="agentc0re@learnix.net"
+APPROVED="abrouwers"

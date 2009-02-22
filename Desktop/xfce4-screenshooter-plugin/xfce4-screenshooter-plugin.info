@@ -1,0 +1,8 @@
+PRGNAM="xfce4-screenshooter-plugin"
+VERSION="1.4.0"
+HOMEPAGE="http://goodies.xfce.org/"
+DOWNLOAD="http://goodies.xfce.org/releases/xfce4-screenshooter-plugin/xfce4-screenshooter-plugin-1.4.0.tar.gz"
+MD5SUM="f12af1a7b809e887b530ade3d7042caa"
+MAINTAINER="Jonathan Larsen (agentc0re)"
+EMAIL="agentc0re@learnix.net"
+APPROVED="abrouwers"

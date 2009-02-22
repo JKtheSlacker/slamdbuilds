@@ -3,7 +3,7 @@
 # Written by JK Wood <joshuakwood@gmail.com>
 
 PRGNAM=freedroidrpg
-VERSION=0.11.1
+VERSION=0.12rc1
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SB64}
@@ -44,7 +44,7 @@ LDFLAGS="-L/lib64 -L/usr/lib64" \
   --docdir=/usr/doc/$PRGNAM-$VERSION \
   --mandir=/usr/man \
   --libdir=/usr/lib64 \
-  --build=$ARCH-slackware-linux \
+  --build=$ARCH-$DISTRO-linux \
   || exit 1
 
 make || exit 1

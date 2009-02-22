@@ -4,4 +4,5 @@ GameBoy Advance, Neo Geo Pocket (Color), NES - both NTSC and PAL,
 PC-FX, WonderSwan (Color), PC Engine/TurboGrafx 16 (CD) and SuperGrafx.
 
 Mednafen requires libsndfile, and will use jack-audio-connection-kit 
-if it's available at build time; both are available from SlackBuilds.org.
+if it's available at build time; both are available from 
+builds.slamd64.com.

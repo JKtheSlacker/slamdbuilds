@@ -1,0 +1,8 @@
+PRGNAM="qstat"
+VERSION="2.11"
+HOMEPAGE="http://qstat.org"
+DOWNLOAD="http://voxel.dl.sourceforge.net/sourceforge/qstat/qstat-2.11.tar.gz"
+MD5SUM="26c09831660ef9049fe74b786b80d091"
+MAINTAINER="Matt Hayes"
+EMAIL="dominian@slackadelic.com"
+APPROVED="jkwood"

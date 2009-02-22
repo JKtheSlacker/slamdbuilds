@@ -69,8 +69,8 @@ LDFLAGs="-L/lib64 -L/usr/lib64" \
   --localstatedir=/var \
   --libdir=/usr/lib64 \
   --disable-static \
-  --build=$ARCH-slackware-linux \
-  --host=$ARCH-slackware-linux
+  --build=$ARCH-$DISTRO-linux \
+  --host=$ARCH-$DISTRO-linux
 
 make
 make install-strip DESTDIR=$PKG

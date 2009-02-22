@@ -1,0 +1,8 @@
+PRGNAM="squeeze"
+VERSION="0.2.3"
+HOMEPAGE="http://squeeze.xfce.org/"
+DOWNLOAD="http://squeeze.xfce.org/downloads/squeeze-0.2.3.tar.bz2"
+MD5SUM="bd3cb0648b49be1f146fc4f675606176"
+MAINTAINER="Andrew Brouwers"
+EMAIL="abrouwers@gmail.com"
+APPROVED="abrouwers"

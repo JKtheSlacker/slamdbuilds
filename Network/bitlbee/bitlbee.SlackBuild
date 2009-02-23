@@ -1,0 +1,119 @@
+#!/bin/sh
+ 
+# SlackBuild Script for bitlbee
+# Copyright 2007-2008  Michiel van Wessem, Manchester, United Kingdom
+# All rights reserved.
+# Modified for Slamd64 by Matt Hayes <dominian@slackadelic.com>
+#
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#
+# * Redistributions of source code must retain the above copyright
+#   notice, this list of conditions and the following disclaimer.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+# OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+PRGNAM=bitlbee
+VERSION=1.2.3
+ARCH=${ARCH:-x86_64}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SB64}
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SB64}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+if [ "$ARCH" = "i486" ]; then
+  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
+elif [ "$ARCH" = "i686" ]; then
+  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
+elif [ "$ARCH" = "x86_64" ]; then
+  SLKCFLAGS="-O2 -fPIC"
+fi
+
+set -e
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $TMP/$PRGNAM-$VERSION
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
+cd $PRGNAM-$VERSION
+chown -R root:root .
+find . \
+ \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
+ -exec chmod 755 {} \; -o \
+ \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
+ -exec chmod 644 {} \;
+
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
+./configure \
+  --prefix=/usr \
+  --config=/var/lib/bitlbee \
+  --etcdir=/etc/bitlbee \
+  --mandir=/usr/man \
+  --msn=1 \
+  --jabber=1 \
+  --oscar=1 \
+  --yahoo=1 \
+  --ipv6=1 \
+  --plugins=1 \
+  --events=glib \
+  --ssl=openssl \
+  --debug=0 || exit 1
+
+if [ -e Makefile.settings ]; then
+    sed -i "s#CPU=x86_64#CPU=$ARCH#" Makefile.settings 
+fi
+
+make all || exit 1
+make install install-etc install-doc DESTDIR=$PKG
+
+( cd $PKG
+  find . | xargs file | grep "executable" | grep ELF | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+  find . | xargs file | grep "shared object" | grep ELF | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null
+)
+
+( cd $PKG/usr/man
+  find . -type f -exec gzip -9 {} \;
+  for i in $( find . -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
+)
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION $PKG/var/lib/$PRGNAM
+cp -a COPYING doc/AUTHORS doc/CHANGES doc/CREDITS doc/FAQ doc/INSTALL \
+  doc/README doc/bitlbee.xinetd doc/user-guide/user-guide.html \
+  doc/user-guide/user-guide.txt doc/user-guide/help.txt \
+  $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+# Rewrite the documentation to replace /usr/local/ with /usr 
+# and /etc/init.d/inetd wih /etc/rc.d/rc.inetd
+find $PKG/usr/doc/$PRGNAM-$VERSION -type f -exec \
+  sed -i 's#/usr/local/#/usr/#' {} \;
+find $PKG/usr/doc/$PRGNAM-$VERSION -type f -exec \
+  sed -i 's#/etc/init.d/inetd#/etc/rc.d/rc.inetd#' {} \;
+
+mv $PKG/etc/$PRGNAM/$PRGNAM.conf $PKG/etc/$PRGNAM/$PRGNAM.conf.new
+mv $PKG/etc/$PRGNAM/motd.txt $PKG/etc/$PRGNAM/motd.txt.new
+chown -R nobody:nogroup $PKG/var/lib/$PRGNAM
+
+mkdir $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.tgz

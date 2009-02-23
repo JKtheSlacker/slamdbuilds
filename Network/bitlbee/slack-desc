@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.  Line
+# up the first '|' above the ':' following the base package name, and the '|'
+# on the right side marks the last column you can put a character in.  You must
+# make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':'.
+
+      |-----handy-ruler------------------------------------------------------|
+bitlbee: bitlbee (an IRC instant messaging gateway)
+bitlbee:
+bitlbee: BitlBee is an IRC instant messaging gateway licensed under
+bitlbee: the terms of the GPLicense. It communicates with the end
+bitlbee: user via the IRC protocol whilst interacting with popular
+bitlbee: chat networks such as AIM, ICQ, MSN, Yahoo and Jabber. 
+bitlbee: The users buddies appear as normal IRC users in a channel
+bitlbee: and conversations use the private message facility of IRC
+bitlbee: compiled with: msn, yahoo, jabber and oscar protocols
+bitlbee: Homepage: http://www.bitlbee.org
+bitlbee: 

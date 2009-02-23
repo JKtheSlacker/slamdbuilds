@@ -1,0 +1,7 @@
+PRGNAM="dia"
+VERSION="0.96.1"
+HOMEPAGE="http://www.gnome.org/projects/dia/"
+DOWNLOAD="ftp://ftp.gnome.org/pub/gnome/sources/dia/0.96/dia-0.96.1.tar.bz2"
+MD5SUM="7b81b22baa2df55efe4845865dddc7b6"
+MAINTAINER="Matt Hayes"
+EMAIL="dominian@slackadelic.com"

@@ -1,0 +1,7 @@
+PRGNAM="recordmydesktop"
+VERSION="0.3.8.1"
+HOMEPAGE="http://recordmydesktop.sourceforge.net/"
+DOWNLOAD="http://voxel.dl.sourceforge.net/sourceforge/recordmydesktop/recordmydesktop-0.3.8.1.tar.gz"
+MD5SUM="6998b165540598965499bd99d8aa0eef"
+MAINTAINER="Matt Hayes"
+EMAIL="dominian@slackadelic.com"

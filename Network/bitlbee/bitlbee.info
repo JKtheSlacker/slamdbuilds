@@ -1,0 +1,7 @@
+PRGNAM="bitlbee"
+VERSION="1.2.3"
+HOMEPAGE="http://www.bitlbee.org"
+DOWNLOAD="http://get.bitlbee.org/src/bitlbee-1.2.3.tar.gz"
+MD5SUM="2b1674d98804970809de3da3edf0bed2"
+MAINTAINER="Matt Hayes"
+EMAIL="dominian@slackadelic.com"

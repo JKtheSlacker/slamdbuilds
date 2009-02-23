@@ -1,0 +1,61 @@
+#!/bin/sh -eu
+
+# Slackware build script for bashdb
+# Written by Erik Hanson  erik@slackbuilds.org
+# Modified for Slamd64 by Matt Hayes <dominian@slackadelic.com>
+
+# This will build without readarray support. Read the INSTALL file in the
+# source directory for instructions if you wish to enable readarray support.
+# readarray speeds up initial loading of large scripts.
+
+PRGNAM=bashdb
+VERSION=4.0_0.2
+ARCH=noarch
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SB64}
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp/SB64}
+PKG=$TMP/package-$PRGNAM
+OUTPUT=${OUTPUT:-/tmp}
+
+SRC_VERSION=$(echo $VERSION | tr '_' '-')
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+rm -rf $PRGNAM-$SRC_VERSION
+tar xvf $CWD/$PRGNAM-$SRC_VERSION.tar.bz2
+cd $PRGNAM-$SRC_VERSION
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+
+# Hack configure, upstream has "tested on bash 3.1 and 4.0 alpha"
+sed -i "s/'4.0'|'3.2')/'4.0'|'3.2'|'3.1')/" configure
+
+./configure \
+  --prefix=/usr \
+  --sysconfdir=/etc \
+  --localstatedir=/var \
+  --mandir=/usr/man \
+  --infodir=/usr/info \
+  --docdir=/usr/doc/$PRGNAM-$VERSION \
+  --disable-static
+
+make || exit 1
+make install-strip DESTDIR=$PKG
+
+find $PKG/usr/man/man1 -type f -exec gzip -9 {} \;
+gzip -9 $PKG/usr/info/*.info
+rm -rf $PKG/usr/info/dir
+
+mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a AUTHORS COPYING ChangeLog ChangeLog.0 INSTALL NEWS README THANKS TODO \
+  $PKG/usr/doc/$PRGNAM-$VERSION
+cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.tgz

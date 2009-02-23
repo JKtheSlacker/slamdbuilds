@@ -1,0 +1,7 @@
+PRGNAM="bashdb"
+VERSION="4.0_0.2"
+HOMEPAGE="http://bashdb.sourceforge.net/"
+DOWNLOAD="http://downloads.sourceforge.net/bashdb/bashdb-4.0-0.2.tar.bz2"
+MD5SUM="8512c748e576a8f52489cbd034edecc0"
+MAINTAINER="Matt Hayes"
+EMAIL="dominian@slackadelic.com"

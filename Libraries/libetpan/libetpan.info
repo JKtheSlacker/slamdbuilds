@@ -1,0 +1,7 @@
+PRGNAM="libetpan"
+VERSION="0.57"
+HOMEPAGE="http://www.etpan.org/"
+DOWNLOAD="http://downloads.sourceforge.net/libetpan/libetpan-0.57.tar.gz"
+MD5SUM="8ce8c6c071e81884a475b12b7f9a9cc0"
+MAINTAINER="Matt Hayes"
+EMAIL="dominian@slacakdelic.com"

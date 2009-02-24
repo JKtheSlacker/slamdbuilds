@@ -77,7 +77,7 @@ CXXFLAGS="$SLKCFLAGS" \
   --debug=0 || exit 1
 
 if [ -e Makefile.settings ]; then
-    sed -i "s#CPU=x86_64#CPU=$ARCH#" Makefile.settings 
+    sed -i "s#CPU=i686#CPU=$ARCH#" Makefile.settings 
 fi
 
 make all || exit 1

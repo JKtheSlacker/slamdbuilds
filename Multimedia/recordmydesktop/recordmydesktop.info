@@ -5,3 +5,4 @@ DOWNLOAD="http://voxel.dl.sourceforge.net/sourceforge/recordmydesktop/recordmyde
 MD5SUM="6998b165540598965499bd99d8aa0eef"
 MAINTAINER="Matt Hayes"
 EMAIL="dominian@slackadelic.com"
+APPROVED="abrouwers"

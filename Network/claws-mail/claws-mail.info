@@ -1,7 +1,0 @@
-PRGNAM="claws-mail"
-VERSION="3.7.0"
-HOMEPAGE="http://www.claws-mail.org/"
-DOWNLOAD="http://downloads.sourceforge.net/sylpheed-claws/claws-mail-3.7.0.tar.bz2"
-MD5SUM="fce9f5233645af3e4607caf79471d6a8"
-MAINTAINER="Matt Hayes"
-EMAIL="dominian@slackadelic.com"

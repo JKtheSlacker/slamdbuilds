@@ -17,3 +17,5 @@ user on your system. You can easily change it. Register and identify yourself
 first, and then:
 	rename root BitlBot
 	(or whatever you want)
+
+Thanks to mwalling for configure.diff

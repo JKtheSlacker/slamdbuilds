@@ -59,10 +59,14 @@ find . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
+patch -p0 < $CWD/configure.diff
+
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
+LDFLAGS="-L/lib64 -L/usr/lib64" \
 ./configure \
   --prefix=/usr \
+  --libdir=/usr/lib64 \
   --config=/var/lib/bitlbee \
   --etcdir=/etc/bitlbee \
   --mandir=/usr/man \

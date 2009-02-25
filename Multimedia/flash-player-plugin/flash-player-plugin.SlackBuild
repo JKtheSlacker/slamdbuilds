@@ -6,7 +6,7 @@
 # Heavily Modified for Slamd64 by JK Wood <joshuakwood@gmail.com>
 
 PRGNAM=flash-player-plugin
-VERSION=10
+VERSION=10.0.22.87
 ARCH=x86_64
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SB64}
@@ -30,7 +30,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 mkdir -p install_flash_player_10_linux
-tar xvf $CWD/libflashplayer-10.0.d21.1.linux-x86_64.so.tar.gz -C install_flash_player_10_linux
+tar xvf $CWD/libflashplayer-$VERSION.linux-x86_64.so.tar.gz -C install_flash_player_10_linux
 cd install_flash_player_10_linux
 chown -R root:root .
 chmod -R u+w,go+r-w,a-s .

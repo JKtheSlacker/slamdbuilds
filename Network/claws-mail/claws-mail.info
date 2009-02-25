@@ -5,3 +5,4 @@ DOWNLOAD="http://downloads.sourceforge.net/sylpheed-claws/claws-mail-3.7.0.tar.b
 MD5SUM="fce9f5233645af3e4607caf79471d6a8"
 MAINTAINER="Matt Hayes"
 EMAIL="dominian@slackadelic.com"
+APPROVED="jkwood"

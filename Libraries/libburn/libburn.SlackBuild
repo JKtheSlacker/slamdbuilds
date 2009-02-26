@@ -25,7 +25,7 @@
 # Updated to slamd64
 
 PRGNAM=libburn
-VERSION=0.6.0
+VERSION=0.6.2
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SB64}
@@ -49,7 +49,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-${VERSION}.pl01.tar.gz
+tar xvf $CWD/$PRGNAM-${VERSION}.pl00.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
 chmod -R u+w,go+r-w,a-s .

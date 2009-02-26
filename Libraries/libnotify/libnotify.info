@@ -1,0 +1,7 @@
+PRGNAM="libnotify"
+VERSION="0.4.5"
+HOMEPAGE="http://www.galago-project.org/news/index.php"
+DOWNLOAD="http://www.galago-project.org/files/releases/source/libnotify/libnotify-0.4.5.tar.bz2"
+MD5SUM="6a8388f93309dbe336bbe5fc0677de6b"
+MAINTAINER="Matt Hayes"
+EMAIL="dominian@slackadelic.com"

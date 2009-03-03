@@ -5,3 +5,4 @@ DOWNLOAD="http://downloads.sourceforge.net/sylpheed-claws/claws-mail-extra-plugi
 MD5SUM="b934a63222d8031e6d6c5aace8c4db72"
 MAINTAINER="Matt Hayes"
 EMAIL="dominian@slackadelic.com"
+APPROVED="jkwood"

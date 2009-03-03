@@ -26,9 +26,9 @@
 set -e
 
 PRGNAM=epdfview
-VERSION=0.1.6
+VERSION=0.1.7
 ARCH=${ARCH:-x86_64}
-BUILD=${BUILD:-2}
+BUILD=${BUILD:-1}
 TAG=${TAG=_SB64}
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SB64}
@@ -55,12 +55,6 @@ chmod -R u+w,go+r-w,a-s .
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 
-# Add patch for printing segfault
-patch -Np0 -i $CWD/epdfview-0.1.6-print-segfault.patch || exit 1
-
-# Add patch for gcc 4.3.x failure
-# patch -Np0 -i $CWD/IDocumentLink.patch || exit 1
-
 ./configure \
   --prefix=/usr \
   --libdir=/usr/lib64 \
@@ -80,7 +74,7 @@ cp -a AUTHORS COPYING INSTALL NEWS README $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 # Fix path to icons in .desktop file
-sed -i 's#Icon=postscript-viewer.png#Icon=epdfview#' $PKG/usr/share/applications/$PRGNAM.desktop
+sed -i 's#Icon=icon_epdfview-48#Icon=epdfview#' $PKG/usr/share/applications/$PRGNAM.desktop
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

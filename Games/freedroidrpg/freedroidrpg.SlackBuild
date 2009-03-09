@@ -2,8 +2,22 @@
 # Slackbuild for freedroidrpg
 # Written by JK Wood <joshuakwood@gmail.com>
 
+# Slackbuild is released under the Dog-on-Fire License:
+# If use of this script causes your dog to catch on fire,
+# you agree to send me five dollars.  Or a picture
+# of the dog on fire.
+# Otherwise, you're on your own.  I've tested the script
+# on my own computer, and it hasn't broken anything.
+# So if it does it on your computer, that falls in
+# the realm of "Not my problem."
+#
+# Of course, if you'll send a bug report to the above
+# email address, I may be able to see what you did
+# wrong and prevent it from happening in the future.
+# In which case, I may just send YOU five dollars.
+
 PRGNAM=freedroidrpg
-VERSION=0.12rc1
+VERSION=0.12
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SB64}
@@ -60,7 +74,7 @@ find $PKG | xargs file | grep -e "executable" -e "shared object" | grep ELF \
 )
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a CHANGES COPYING CREDITS README TODO \
+cp -a COPYING Changelog HELP_WANTED README \
   $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 find $PKG/usr/doc -name "Makefile" -exec rm {} \;

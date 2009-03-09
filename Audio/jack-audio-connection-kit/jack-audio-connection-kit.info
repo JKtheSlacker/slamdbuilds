@@ -1,0 +1,8 @@
+PRGNAM="jack-audio-connection-kit"
+VERSION="0.116.2"
+HOMEPAGE="http://jackaudio.org"
+DOWNLOAD="http://jackaudio.org/downloads/jack-audio-connection-kit-0.116.2.tar.gz"
+MD5SUM="9c0ae9880e9b6e081f1a238fe6a28bd5"
+MAINTAINER="JK Wood"
+EMAIL="joshuakwood@gmail.com"
+APPROVED="jkwood"

@@ -6,11 +6,8 @@ Some features include:
 - Many encryption schemes, some of which include WEP/WPA/WPA2
 - Compatible with wireless-tools 
 
-You will need to start the wicd service at boot by adding the following 
-to your /etc/rc.d/rc.local:
-	if [ -x /etc/rc.d/rc.wicd ]; then
-		/etc/rc.d/rc.wicd start
-	fi
+To have wicd start at bootup, simply "chmod +x /etc/rc.d/rc.wicd"; support
+was already added to slamd64's stock init scripts.
 
 This should default to using dhcpcd after installation unless you have a 
 previous installation that uses dhclient; in that case, you will have a 

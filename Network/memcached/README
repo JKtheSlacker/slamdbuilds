@@ -1,0 +1,6 @@
+memcached (distributed object caching system)
+memcached is a high-performance, distributed memory object caching
+system, generic in nature, but intended for use in speeding up
+dynamic web applications by alleviating database load.
+
+This package requires libevent, available from builds.slamd64.com.

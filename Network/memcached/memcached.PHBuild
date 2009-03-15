@@ -1,0 +1,38 @@
+#!/bin/sh
+# Build script for memcached
+# Written by Fred Emmott <mail@fredemmott.co.uk>
+
+PKGNAM=memcached
+VERSION=${VERSION:-1.2.6}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SB64}
+TMP=${TMP:-/tmp/SB64}
+OUTPUT=${OUTPUT:-/tmp} # not yet supported by pkghelpers, will be shortly
+
+. /etc/pkghelpers
+pkghelpers_env
+
+rm -rf $PKG
+mkdir -p $TMP $PKG
+cd $TMP
+
+rm -rf $PKG $PKGNAM-$VERSION
+tar xfv $CWD/$PKGNAM-$VERSION.tar.?z*
+cd $PKGNAM-$VERSION || exit 1
+
+pkghelpers_permissions
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
+./configure \
+	--prefix=/usr \
+	--libdir=/usr/lib$LIBSUFFIX \
+	--mandir=/usr/man
+make -j$NUMJOBS || exit 1
+make install DESTDIR=$PKG || exit 1
+rm $PKG/usr/bin/memcached-debug # not needed for distribution
+
+cd $PKG
+mkdir install
+cat $CWD/slack-desc > install/slack-desc
+pkghelpers_fixup
+pkghelpers_makepkg

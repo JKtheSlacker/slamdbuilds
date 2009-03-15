@@ -1,0 +1,8 @@
+PRGNAM="libmemcached"
+VERSION="0.26"
+HOMEPAGE="http://tangent.org/552/libmemcached.html"
+DOWNLOAD="http://download.tangent.org/libmemcached-0.26.tar.gz"
+MD5SUM="a53eaa92785b7835f2a2b784e9805748"
+MAINTAINER="Fred"
+EMAIL="mail@fredemmott.co.uk"
+APPROVED="Fred"

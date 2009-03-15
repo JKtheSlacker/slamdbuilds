@@ -1,0 +1,8 @@
+PRGNAM="libevent"
+VERSION="1.4.9"
+HOMEPAGE="http://www.monkey.org/~provos/libevent/"
+DOWNLOAD="http://www.monkey.org/~provos/libevent-1.4.9-stable.tar.gz"
+MD5SUM="5154fd4582d64077d6b17851f04d6957"
+MAINTAINER="Fred"
+EMAIL="mail@fredemmott.co.uk"
+APPROVED="Fred"

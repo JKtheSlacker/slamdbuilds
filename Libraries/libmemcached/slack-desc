@@ -6,6 +6,6 @@ libmemcached: Several command line utilities are also included:
 libmemcached:   memcat - copy the value of a key to standard output
 libmemcached:   memflush - flush the contents of the servers
 libmemcached:   memrm - remove a key from the server
-libmemcached:   memcp - copy fiels to a memcached server
+libmemcached:   memcp - copy files to a memcached server
 libmemcached:   memstat - dump statistics of a server
 libmemcached:   memslap - generate testing loads on a memcached cluster

@@ -1,0 +1,7 @@
+PRGNAM="faad2"
+VERSION="2.7"
+HOMEPAGE="http://www.audiocoding.com/"
+DOWNLOAD="http://downloads.sourceforge.net/faac/faad2-2.7.tar.bz2"
+MD5SUM="4c332fa23febc0e4648064685a3d4332"
+MAINTAINER="Matt Hayes"
+EMAIL="dominian@slackadelic.com"

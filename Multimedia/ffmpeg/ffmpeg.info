@@ -1,0 +1,7 @@
+PRGNAM="ffmpeg"
+VERSION="20081105"
+HOMEPAGE="http://ffmpeg.mplayerhq.hu"
+DOWNLOAD="http://slackbuilds.org/sources/12.2/ffmpeg-20081105.tar.bz2"
+MD5SUM="6f6e1a752c946f7ce4c923508a4f454e"
+MAINTAINER="Matt Hayes"
+EMAIL="dominian@slackadelic.com"

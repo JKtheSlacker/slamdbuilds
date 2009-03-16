@@ -1,0 +1,7 @@
+PRGNAM="x264"
+VERSION="20081104"
+HOMEPAGE="http://www.videolan.org/developers/x264.html"
+DOWNLOAD="ftp://ftp.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-20081104-2245.tar.bz2"
+MD5SUM="23782a44487998a3a8dd46fcf69ff39e"
+MAINTAINER="Matt Hayes"
+EMAIL="dominian@slackadelic.com"

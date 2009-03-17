@@ -8,5 +8,5 @@ detect the already installed libmp4v2 and build against it. Then, when you
 upgrade to the new package, it doesn't have the included libmp4v2, because
 it was part of the old package, so faac is linking to a nonexistent library 
 after the upgrade.  Long story short, we strongly recommend using the 
-external libmp4v2 (available from SlackBuilds.org); just make sure it is 
+external libmp4v2 (available from builds.slamd64.com); just make sure it is 
 installed when you configure faac, and it will be detected automatically.

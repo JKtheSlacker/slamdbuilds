@@ -2,7 +2,7 @@
 
 # Slackware build script for arora
 
-# Copyright 2008 Andrew Brouwers
+# Copyright 2008, 2009 Andrew Brouwers
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -24,7 +24,7 @@
 
 PKGNAM=arora
 VERSION=${VERSION:-0.5}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 
 . /etc/pkghelpers
 pkghelpers_env
@@ -40,7 +40,7 @@ cd $PKGNAM-$VERSION
 # Make sure ownerships and permissions are sane:
 pkghelpers_permissions
 
-qmake PREFIX=/usr
+qmake PREFIX="/usr" "CONFIG-=debug" -r
 make
 make INSTALL_ROOT=$PKG install
 

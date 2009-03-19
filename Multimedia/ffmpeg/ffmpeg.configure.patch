@@ -1,0 +1,11 @@
+--- configure	2009-03-16 13:01:06.000000000 +0000
++++ configure.old	2009-03-16 12:59:29.000000000 +0000
+@@ -1045,7 +1045,7 @@
+ prefix_default="/usr/local"
+ bindir_default='${prefix}/bin'
+ incdir_default='${prefix}/include'
+-libdir_default='${prefix}/lib64'
++libdir_default='${prefix}/lib'
+ mandir_default='${prefix}/share/man'
+ shlibdir_default="$libdir_default"
+ 

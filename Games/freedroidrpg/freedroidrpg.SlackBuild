@@ -17,7 +17,7 @@
 # In which case, I may just send YOU five dollars.
 
 PRGNAM=freedroidrpg
-VERSION=0.12
+VERSION=0.12.1
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SB64}

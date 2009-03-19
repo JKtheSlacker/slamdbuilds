@@ -1,0 +1,8 @@
+PRGNAM="aMule"
+VERSION="2.2.3"
+HOMEPAGE="http://www.amule.org"
+DOWNLOAD="http://downloads.sourceforge.net/amule/aMule-2.2.3.tar.bz2"
+MD5SUM="64a0d41edbdd7cf36fa892e45a652bfd"
+MAINTAINER="JK Wood"
+EMAIL="joshuakwood@gmail.com"
+APPROVED="jkwood"

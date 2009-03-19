@@ -1,0 +1,39 @@
+#!/bin/sh
+# Build script for libevent
+# Written by Fred Emmott <mail@fredemmott.co.uk>
+
+PKGNAM=libevent
+VERSION=${VERSION:-1.4.9}
+BUILD=${BUILD:-1}
+TAG=${TAG:-_SB64}
+TMP=${TMP:-/tmp/SB64}
+OUTPUT=${OUTPUT:-/tmp} # not yet supported by pkghelpers, will be shortly
+
+. /etc/pkghelpers
+pkghelpers_env
+
+rm -rf $PKG
+mkdir -p $TMP $PKG
+cd $TMP
+
+rm -rf $PKG $PKGNAM-$VERSION-stable
+tar xfv $CWD/$PKGNAM-$VERSION-stable.tar.?z*
+cd $PKGNAM-$VERSION-stable || exit 1
+
+pkghelpers_permissions
+CFLAGS="$SLKCFLAGS" \
+CXXFLAGS="$SLKCFLAGS" \
+./configure \
+	--prefix=/usr \
+	--libdir=/usr/lib$LIBSUFFIX \
+	--mandir=/usr/man \
+	--disable-static \
+	--enable-shared 
+make -j$NUMJOBS || exit 1
+make install DESTDIR=$PKG || exit 1
+
+cd $PKG
+mkdir install
+cat $CWD/slack-desc > install/slack-desc
+pkghelpers_fixup
+pkghelpers_makepkg

@@ -26,7 +26,7 @@
 # Modified for Slamd64 by JK Wood
 
 NAME=wesnoth
-VERSION=${VERSION:-1.4.6}
+VERSION=${VERSION:-1.6a}
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SB64}

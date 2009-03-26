@@ -10,11 +10,14 @@
 # Modified for Slamd64 by JK Wood <joshuakwood@gmail.com>
 
 PRGNAM=linuxwacom
-VERSION=${VERSION:-0.8.2}
+VERSION=${VERSION:-0.8.2_2}
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SB64}
 DISTRO=${DISTRO:-slamd64}
+
+# Thanks to paul wisehart for sugesting this
+SRCVER=$(echo $VERSION | tr _ -)
 
 CWD=$(pwd)
 TMP=${TMP:-/tmp/SB64}
@@ -37,7 +40,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
+tar xvf $CWD/$PRGNAM-$SRCVER.tar.bz2
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find . \

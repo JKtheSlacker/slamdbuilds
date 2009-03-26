@@ -26,7 +26,7 @@
 # Modified for Slamd64 by JK Wood <joshuakwood@gmail.com
 
 PRGNAM=Songbird
-VERSION=1.0.0-860
+VERSION=1.1.1-1018
 ARCH=x86_64  # Leave this Alone. Precompiled binary
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SB64}
@@ -49,7 +49,7 @@ mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 # set up the target enviroment and extract Songbird in there
 mkdir -p $PKG/usr/{bin,lib64}
-tar xzf $CWD/${PRGNAM}_${VERSION}_linux-${ARCH}.tar.gz -C $PKG/usr/lib64
+tar xvzf $CWD/${PRGNAM}_${VERSION}_linux-${ARCH}.tar.gz -C $PKG/usr/lib64
 chown -R root:root .
 # Added "-o -perm 700" to this to take care of the borked directory permissions 
 # that songbird seems to have
@@ -59,8 +59,8 @@ find . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
     -exec chmod 644 {} \;   
 
-# Since with version 1.0.0 the symlink solution seems to break Songbird,
-# we're installing a small wrapper script.
+# Since version 1.0.0 the symlink solution seems to break Songbird,
+# so we're installing a small wrapper script.
 cat $CWD/$WRAPPER > $PKG/usr/bin/$WRAPPER
 chmod 0755 $PKG/usr/bin/$WRAPPER
 
@@ -77,6 +77,13 @@ cp $PKG/usr/lib64/$PRGNAM/chrome/icons/default/default.xpm $PKG/usr/share/pixmap
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 cat $CWD/doinst.sh > $PKG/install/doinst.sh
+
+# This fixes a problem related to a lack of gconf
+cd $PKG/usr/lib64/Songbird/chrome/
+/usr/lib64/java/bin/jar xvf songbird.jar
+patch -p3 content/songbird/scripts/appInit.js < zcat $CWD/no.gconf.patch.gz
+/usr/lib64/java/bin/jar uvf songbird.jar content/songbird/scripts/appInit.js
+rm -rf content icons skin
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$PKGVER-$PKGARCH-$BUILD$TAG.tgz

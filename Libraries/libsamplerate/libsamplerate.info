@@ -1,0 +1,8 @@
+PRGNAM="libsamplerate"
+VERSION="0.1.6"
+HOMEPAGE="http://www.mega-nerd.com/SRC/"
+DOWNLOAD="http://www.mega-nerd.com/SRC/libsamplerate-0.1.6.tar.gz"
+MD5SUM="4ccc22b21f469aac672dda8eb1320ea4"
+MAINTAINER="JK Wood"
+EMAIL="joshuakwood@gmail.com"
+APPROVED="jkwood"

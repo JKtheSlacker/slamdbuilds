@@ -55,7 +55,7 @@ strip --strip-unneeded $PKG/usr/bin/* 2>/dev/null || true
 mkdir -p $PKG/usr/lib64/mumble/plugins
 install -m 0755 ./release/libmumble.so.1.1.4 $PKG/usr/lib64/mumble
 install -m 0755 -D ./release/plugins/liblink.so $PKG/usr/lib64/mumble/plugins
-find $PKG/usr/lib | xargs strip --strip-unneeded 2>/dev/null || true
+find $PKG/usr/lib64 | xargs strip --strip-unneeded 2>/dev/null || true
 ( cd $PKG/usr/lib64/mumble
   ln -s libmumble.so.1.1.4 libmumble.so.1.1
   ln -s libmumble.so.1.1 libmumble.so.1

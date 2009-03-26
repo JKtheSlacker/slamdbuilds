@@ -16,7 +16,7 @@ PKG=$TMP/package-$PRGNAM
 OUTPUT=${OUTPUT:-/tmp}
 
 # The default themepack for murrine is 
-# http://cimi.netsons.org/media/download_gallery/MurrineThemePack.tar.bz2
+# http://cimitan.com/media/download_gallery/MurrineThemePack.tar.bz2
 # Others may work fine here, but the script has not been tested with them.
 # If you want to use another theme or themepack, ammend the line below.
 THEME=MurrineThemePack

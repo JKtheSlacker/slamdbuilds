@@ -1,0 +1,8 @@
+PRGNAM="cabextract"
+VERSION="1.2"
+HOMEPAGE="http://www.cabextract.org.uk"
+DOWNLOAD="http://www.cabextract.org.uk/cabextract-1.2.tar.gz"
+MD5SUM="dc421a690648b503265c82ade84e143e"
+MAINTAINER="JK Wood"
+EMAIL="joshuakwood@gmail.com"
+APPROVED="jkwood"

@@ -25,7 +25,7 @@
 # Modified (lightly) for Slamd64 by JK Wood <joshuakwood@gmail.com>
 
 PRGNAM=wine
-VERSION=1.1.14
+VERSION=1.1.18
 ARCH=${ARCH:-x86_64}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SB64}
